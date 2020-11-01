@@ -7,6 +7,7 @@ public enum Level {
 	private int numberOfVampires;
 	private double vampireFrequency;
 	private int dim_x, dim_y;
+	/////////////////////////////
 
 	private Level(String name, int numberOfVampires, double vampireFrequency, int dim_x, int dim_y) {
 		this.name = name;
@@ -30,6 +31,21 @@ public enum Level {
         for (Level level : Level.values())
             allLevels += level.name() + separator;
         return allLevels.substring(0, allLevels.length() - separator.length());
+    }
+    public int getnumberOfVampires() {
+		return numberOfVampires;
+	}
+    public double getvampireFrequency() {
+		return this.vampireFrequency;
+	}
+    public int getdim_x() {
+		return this.dim_x;
+	}
+    public int getdim_y() {
+    	return this.dim_y;
+    }
+    public String getname() {
+    	return this.name;
     }
 
 }

@@ -1,6 +1,7 @@
 package Control;
 import java.util.Scanner;
 import Logic.Game;
+import Logic.GameObjects.*;
 
 public class Controller {
 
@@ -32,6 +33,19 @@ public class Controller {
     
     public void run() {
 		// TODO fill your code
-    }
+    	Boolean finaliza = false;
+    		
+	    	System.out.println(game.toString());
+			System.out.print(prompt);
+			String scaner = scanner.nextLine();
+			String auxscaner = scaner.toLowerCase();
+			String scaner1 = auxscaner.trim();
+			String[] arg = scaner1.split(" ");
+	    	
+	    	
+			this.game.addSlayer(Integer.parseInt(arg[2]), Integer.parseInt(arg[3]));
+    	}
 
+
+    
 }
