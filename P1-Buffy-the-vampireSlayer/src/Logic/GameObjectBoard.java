@@ -21,26 +21,16 @@ import Logic.Lists.VampireList;
 			this.listaslayer.add(auxslayer );
 			return true;
 		}
-		public boolean addVamire(String nivel,int numVampire,int x , int y) {
-			Vampire auxVampire=new Vampire( nivel,numVampire,x, y,game);
+
+		public boolean addVampire(int x , int y) {
+			Vampire auxVampire=new Vampire(x, y,game);
 			this.listavampire.add(auxVampire);
 			return true;
 		}
-//		public boolean isFinished(){
-//			if(this.listavampire.getContador() == 0 ){
-//				this.setWinner(true); // Gana jugador
-//				return true;
-//			}
-//			
-//			for(int i = 0; i < this.listaZombie.getContador(); i++){
-//				if(this.getListaZombie().getPosicion(i).getY() == 0){
-//					System.out.println("i: " + i);
-//					this.setWinner(false); // Gana zombie
-//					return true;
-//				}
-//			}
-//			return false;
-//		}
+		
+		
+		
+
 
 
 }

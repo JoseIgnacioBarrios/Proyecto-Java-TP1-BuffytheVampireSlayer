@@ -8,19 +8,24 @@ public class Vampire {
 	private int numVampire;
 	private int x;
     private int y;
-    private int vida=3;
-    private final int casillaMoverse = 1;
-    private final int turnosMoverse = 2;
-    private final int danno = 1;
+    private int vida;
+    private final int casillaMoverse;
+    private final int turnosMoverse;
+    private final int danno;
     private Game game;
     private Level level;
     
-    public Vampire(String nivel, int numVampire ,int x, int y,Game game){
-    	this.nivel=nivel;
-    	this.numVampire=numVampire;
+    public Vampire(int x, int y,Game game){//?????????????????????debe saberlo los x,y,nivel
+//    	this.nivel=nivel;
+//    	this.numVampire=numVampire;
     	this.x= x;
     	this.y= y;
     	this.game = game;
+    	
+    	 this.vida=3;
+    	 this.casillaMoverse = 1;
+    	 this.turnosMoverse = 2;
+    	 this.danno = 1;
     }
    
   

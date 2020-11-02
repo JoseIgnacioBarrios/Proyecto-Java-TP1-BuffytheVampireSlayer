@@ -5,10 +5,10 @@ import Logic.Game;
 public class Slayer {
 	private int x;
     private int y;
-    private int vida=3;
-    private final int disparos = 1;
-    private final int danno = 1;
-    private final int coste = 50;
+    private int vida;
+    private final int disparos;
+    private final int danno;
+    private final int coste;
     private Game game;
     
     public Slayer( int x,int y, Game game){
@@ -16,6 +16,11 @@ public class Slayer {
     	this.x= x;
     	this.y= y;
     	this.game = game;
+    	
+    	this.vida=3;
+    	this.disparos=1;
+    	this.danno=1;
+    	this.coste=50;
     }
     
     

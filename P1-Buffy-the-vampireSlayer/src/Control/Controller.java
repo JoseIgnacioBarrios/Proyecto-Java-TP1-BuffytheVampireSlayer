@@ -27,15 +27,21 @@ public class Controller {
 	    this.scanner = scanner;
     }
     
+//    public String printGame() {
+//    	return this.game.toString();
+//		
+//    }
     public void  printGame() {
-   	 System.out.println(game);
-   }
+      	 System.out.println(game.toString());//
+      }
     
     public void run() {
 		// TODO fill your code
-    	Boolean finaliza = false;
+    	
     		
-	    	System.out.println(game.toString());
+    		System.out.println("Vamos a pintar el tablero");
+    		//System.out.println(this.printGame());
+    		printGame();
 			System.out.print(prompt);
 			String scaner = scanner.nextLine();
 			String auxscaner = scaner.toLowerCase();
@@ -44,6 +50,7 @@ public class Controller {
 	    	
 	    	
 			this.game.addSlayer(Integer.parseInt(arg[2]), Integer.parseInt(arg[3]));
+			this.game.addVampire();
     	}
 
 

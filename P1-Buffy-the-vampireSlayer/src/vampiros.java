@@ -3,6 +3,9 @@ import Logic.Level;
 import Logic.Game;
 import java.util.Scanner;
 
+///////////////////////
+import View.Gameprinter;
+
 
 public class vampiros {
 		public static final String version = "1.0";
@@ -32,7 +35,7 @@ public class vampiros {
 					System.out.print(welcomeMsg);
 					System.out.println(seedInfoMsg + seed);
 					
-					Controller controller = new Controller(new Game(seed, level), new Scanner(System.in));
+					Controller controller = new Controller(new Game(seed, level),new Scanner(System.in));
 					controller.run();
 				}
 				catch (NumberFormatException nfe) {
