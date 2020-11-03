@@ -2,22 +2,33 @@ package Logic.Lists;
 import Logic.GameObjects.Slayer;
 
 
+
 public class SlayerList {
 	
-	private int contador=0;
-	private int numslayer=36;
+	private int contadorslayer=0;
+	private int numslayer;
 	
 	private  Slayer[] slayerList;
 	
-	public SlayerList() {
-		slayerList = new Slayer[numslayer];//max posile de slayer
+	public SlayerList(int numslayer) {
+		this.numslayer=numslayer;
+		slayerList = new Slayer[this.numslayer];//max posile de slayer
 	}
 	///////////////////////////////
 	public void add(Slayer slayer) {
-		if(contador<numslayer) {
-			slayerList[contador] = slayer;
-			contador++;
+		if(this.contadorslayer<numslayer) {
+			slayerList[this.contadorslayer] = slayer;
+			this.contadorslayer++;
 		}
-		
+	}
+	public Slayer getSlayer(int x) {//devuelve vampire de la pos X
+		if (x>=this.contadorslayer) {
+			return null;
+		}
+		return this.slayerList[x];
+	}
+	public int getnumvampire() 
+	{
+		return this.numslayer;
 	}
 }

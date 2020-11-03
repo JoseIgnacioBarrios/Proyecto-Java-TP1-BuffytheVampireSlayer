@@ -36,8 +36,7 @@ public class Vampire {
     	this.vida = vida - dano;
     }
     public void muerte(int poslista) {
-    	
-    	
+
     }
 	//lista[i].getY();
 

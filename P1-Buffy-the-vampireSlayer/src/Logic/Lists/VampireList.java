@@ -8,6 +8,7 @@ public class VampireList {
 	private Vampire[] vampireList;
 	
 	public VampireList(int numvampire) {
+		this.numvampire=numvampire;
 		vampireList = new Vampire[numvampire];
 		this.contador=0;
 	}
@@ -23,21 +24,27 @@ public class VampireList {
 		}
 	}
 
-	public Vampire[] getVampireList() {
-		return vampireList;
-	}
+//	public Vampire[] getVampireList() {
+//		return vampireList;
+//	}
 
-	public void setVampireList(Vampire[] vampireList) {
-		this.vampireList = vampireList;
-	}
+//	public void setVampireList(Vampire[] vampireList) {
+//		this.vampireList = vampireList;
+//	}
 	
 	public Vampire getVampire(int x) {//devuelve vampire de la pos X
 		if (x>=this.contador) {
 			return null;
 		}
 		return this.vampireList[x];
-		
-		
+	}
+
+	public int getContador() {//gett
+		return contador;
+	}
+	public int getnumvampire() 
+	{
+		return this.numvampire;
 	}
 	
 
