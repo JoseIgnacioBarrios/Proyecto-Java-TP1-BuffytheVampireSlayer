@@ -2,7 +2,7 @@ package Logic;
 
 //import Logic.Lists.SlayerList;
 //import Logic.Lists.VampireList;
-//import Logic.GameObjects.Slayer;
+import Logic.GameObjects.Slayer;
 import View.Gameprinter;
 import Logic.GameObjects.Player;
 
@@ -21,6 +21,7 @@ public class Game {
 	private int dimx;
 	private int dimy;
 //	private double frecuencia;
+	private Slayer slayer;
 	
 ////////////////////////////////////////
 	private int ciclo;
@@ -46,7 +47,7 @@ public class Game {
 			int aleatorio = (int)(Math.random()*nivel.getdim_y()+1);//calcular aleatorio
 			
 			if(generatevampire() == true) {
-				this.gameObjectboard.addVampire((nivel.getdim_x()-1), aleatorio);
+				this.gameObjectboard.addVampire((nivel.getdim_x()), aleatorio);
 			}
 		}
 		//si puede crear un vampire sw if 0.1
@@ -108,6 +109,7 @@ public class Game {
 		}
 		public void update() 
 		{
+			
 			addVampire();
 			this.ciclo++;
 		}
@@ -119,13 +121,15 @@ public class Game {
 			return this.gameObjectboard.getWinner();
 		}
 		
-		public String toString() {
+		public String toString() {//////////////////////TABLERO//////////////////////////////////////////////////////
 			Gameprinter str = new Gameprinter(this,nivel.getdim_x(),nivel.getdim_y());
 			
 			String estado;
 			estado = "Number of cycles: "  +"\n"  + 
 			"Coins: "  +"\n"  + 
-			"Remainig vampires: "+this.nivel.getnumberOfVampires() +"\n" + str.toString();
+			"Remainig vampires: "+this.gameObjectboard.getvampireporAparecer() +"\n" +
+			"Vampire on the board: "+"\n"+
+			str.toString();
 			return estado;
 		}
 		public boolean coinsSuficiente() 
@@ -138,6 +142,56 @@ public class Game {
 			}
 			else return ok;
 		}
+		public int getxsalyergame() {
+			return this.slayer.getXsalyer();
+		}
+		
+		public void attack() 
+		{
+			for(int i=1; i<=this.gameObjectboard.getListavampire().getContadorvampire();i++) {
+				for(int k=1; k<=this.gameObjectboard.getListaslayer().getContadorslayer();k++) {
+					
+					if(		((this.gameObjectboard.getListaslayer().getSlayer(k).getXsalyer()+1)==
+							this.gameObjectboard.getListavampire().getVampire(i).getXvampire()) &&
+							(this.gameObjectboard.getListaslayer().getSlayer(k).getYslayer()==
+							this.gameObjectboard.getListavampire().getVampire(i).getYvampire())
+						
+						)
+						{
+						muerdeaSlayer(k);
+						}
+					if(this.gameObjectboard.getListaslayer().getSlayer(k).getYslayer()==this.gameObjectboard.getListavampire().getVampire(i).getYvampire()) 
+						{
+							if(this.gameObjectboard.tieneVidaslayer(k)==true) 
+							{
+								if(this.gameObjectboard.tieneVidaVampire(i)==true) {
+									if(this.gameObjectboard.tieneBala(k)==true) {
+										disparaaVampire(i);
+										this.gameObjectboard.restaBala(k);
+									}
+									
+								}
+								
+							}
+						}
+				}
+				
+			}
+			////////////////recarga bala
+			for (int j=1;j<=this.gameObjectboard.getListaslayer().getContadorslayer();j++) {
+				this.gameObjectboard.recargaBala(j);
+			}
+			
+		}
+		
+		private void disparaaVampire(int i) {
+			this.gameObjectboard.getListavampire().getVampire(i).recibedannoVampire();
+		}
+		
+		public void muerdeaSlayer(int k) {
+			this.gameObjectboard.getListaslayer().getSlayer(k).recibedanno();
+		}
+	
 		
 		
 	

@@ -47,16 +47,22 @@ public class Vampire {
 	public int getTurnosMoverse() {
 		return turnosMoverse;
 	}
-	public int getX() {
+	public int getXvampire() {
 		return x;
 	}
 
-	public int getY() {
+	public int getYvampire() {
 		return y;
 	}
 
 	public int getVida() {
 		return vida;
+	}
+	public void recibedannoVampire() {
+		this.vida-=this.danno;
+	}
+	public String toString() {
+		return "V ["+this.vida+"]";
 	}
 	
 }
