@@ -69,5 +69,9 @@ public class VampireList {
 	{
 		return this.vampireporAparecer;
 	}
+	public void mueve(int x) {
+		this.vampireList[x].mueveXvampire();
+	}
+	
 
 }

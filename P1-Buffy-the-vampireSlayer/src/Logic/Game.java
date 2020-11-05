@@ -57,6 +57,7 @@ public class Game {
 		public boolean generatevampire() {
 			boolean ok=false;
 			int aleatorio = (int)(Math.random()*10+1); //aleatorio
+			String c=nivel.getname();
 			switch(nivel.getname()) {
 				case "EASY":{
 					if (aleatorio == 1) {
@@ -121,17 +122,7 @@ public class Game {
 			return this.gameObjectboard.getWinner();
 		}
 		
-		public String toString() {//////////////////////TABLERO//////////////////////////////////////////////////////
-			Gameprinter str = new Gameprinter(this,nivel.getdim_x(),nivel.getdim_y());
-			
-			String estado;
-			estado = "Number of cycles: "  +"\n"  + 
-			"Coins: "  +"\n"  + 
-			"Remainig vampires: "+this.gameObjectboard.getvampireporAparecer() +"\n" +
-			"Vampire on the board: "+"\n"+
-			str.toString();
-			return estado;
-		}
+		
 		public boolean coinsSuficiente() 
 		{
 			boolean ok=false;
@@ -142,9 +133,9 @@ public class Game {
 			}
 			else return ok;
 		}
-		public int getxsalyergame() {
-			return this.slayer.getXsalyer();
-		}
+//		public int getxsalyergame() {
+//			return this.slayer.getXsalyer();
+//		}
 		
 		public void attack() 
 		{
@@ -184,12 +175,30 @@ public class Game {
 			
 		}
 		
-		private void disparaaVampire(int i) {
+		public void disparaaVampire(int i) {
 			this.gameObjectboard.getListavampire().getVampire(i).recibedannoVampire();
 		}
 		
 		public void muerdeaSlayer(int k) {
 			this.gameObjectboard.getListaslayer().getSlayer(k).recibedanno();
+		}
+		
+		///////////////movimiento ////////////////////////////
+		public void movimiento() {
+			
+		}
+		/////////////////////////////////////////////////////////////
+		
+		public String toString() {//////////////////////TABLERO//////////////////////////////////////////////////////
+			Gameprinter str = new Gameprinter(this,nivel.getdim_x(),nivel.getdim_y());
+			
+			String estado;
+			estado = "Number of cycles: "  +"\n"  + 
+			"Coins: "  +"\n"  + 
+			"Remainig vampires: "+this.gameObjectboard.getvampireporAparecer() +"\n" +
+			"Vampire on the board: "+"\n"+
+			str.toString();
+			return estado;
 		}
 	
 		

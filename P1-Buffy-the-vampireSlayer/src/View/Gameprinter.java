@@ -51,6 +51,6 @@ public class Gameprinter {
 		        else str.append(lineEdge);   
 		}
 
-		return str.toString();
+		return str.toString()+"peppitoooooo";
 	    }
 }

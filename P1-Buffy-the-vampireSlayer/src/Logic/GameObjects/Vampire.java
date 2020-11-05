@@ -48,15 +48,19 @@ public class Vampire {
 		return turnosMoverse;
 	}
 	public int getXvampire() {
-		return x;
+		return this.x;
 	}
 
 	public int getYvampire() {
-		return y;
+		return this.y;
+	}
+	public void mueveXvampire()
+	{
+		this.x-=1;
 	}
 
 	public int getVida() {
-		return vida;
+		return this.vida;
 	}
 	public void recibedannoVampire() {
 		this.vida-=this.danno;

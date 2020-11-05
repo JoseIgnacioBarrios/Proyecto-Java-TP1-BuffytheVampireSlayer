@@ -52,9 +52,9 @@ import Logic.Lists.VampireList;
 				this.setWinner(ok);
 				return ok;
 			}
-			for (int i=1; i <= this.listavampire.getContadorvampire(); i++) {
-				if (this.listavampire.getVampire(i).getXvampire()-1<=0) {//x?????
-					ok=false;
+			for (int i=1; i < this.listavampire.getContadorvampire(); i++) {
+				if (this.listavampire.getVampire(i).getXvampire()<=0 ){//x?????
+					ok=true;
 					this.setWinner(ok);
 					return ok;
 				}
@@ -113,6 +113,32 @@ import Logic.Lists.VampireList;
 			this.listaslayer.recargaBala(j);
 		}
 		
+		////////////////mov/////////////////////////
+		public void update() {
+			
+		}
+
+		public void movVampire() {
+			for (int i = 1; i < this.listavampire.getContadorvampire(); i++) {
+				for (int j = 1; j < this.listaslayer.getContadorslayer(); j++) {
+					
+					if (!(this.listavampire.getVampire(i).getXvampire()-1==this.listaslayer.getSlayer(j).getXsalyer()&&
+							this.listavampire.getVampire(i).getYvampire()==this.listaslayer.getSlayer(j).getYslayer()))
+						{	
+							this.listavampire.mueve(i);	
+						}
+				}
+			}	
+		}
+		public void removeDead() {
+			for (int i = 1; i < this.listavampire.getContadorvampire(); i++) {
+				for (int j = 1; j < this.listaslayer.getContadorslayer(); j++) {
+					
+				}
+			}
+		}
+					
+		//////////////////////////////////////////////
 
 
 
