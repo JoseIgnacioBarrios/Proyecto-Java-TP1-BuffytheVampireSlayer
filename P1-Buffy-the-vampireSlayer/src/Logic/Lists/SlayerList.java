@@ -7,6 +7,9 @@ public class SlayerList {
 	
 	private int contadorslayer=0;//el numero de slayer que se agregaron en la tabla
 	private int numslayer;//el maximo de Slayer que puede haber
+	private int x;
+	private int y;
+	private int v;
 	
 	private  Slayer[] slayerList;
 	
@@ -23,9 +26,6 @@ public class SlayerList {
 		}
 	}
 	public Slayer getSlayer(int x) {//devuelve vampire de la pos X
-		if (x>=this.contadorslayer) {
-			return null;
-		}
 		return this.slayerList[x];
 	}
 	public int getContadorslayer() {
@@ -64,4 +64,19 @@ public class SlayerList {
 //		}
 //		return x;
 //	}
+	public boolean buscarSlayer(int x,int y) {
+		this.x=x;
+		this.y=y;
+		for (int i=1;i<=this.contadorslayer;i++) {
+			if(this.slayerList[i].getXsalyer()==this.x && this.slayerList[i].getYslayer()==this.y) {
+				this.v=i;
+				return true;
+			}
+		}
+		return false;
+	}
+	public String iconoSlayer(){
+		return this.slayerList[this.v].toString();
+		
+	}
 }

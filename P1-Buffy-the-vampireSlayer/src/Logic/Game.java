@@ -44,34 +44,35 @@ public class Game {
 			return true;
 		}
 		public void addVampire() {
-			int aleatorio = (int)(Math.random()*nivel.getdim_y()+1);//calcular aleatorio
+			int aleatorio = (int)(Math.random()*nivel.getdim_y());//calcular aleatorio
 			
 			if(generatevampire() == true) {
 				this.gameObjectboard.addVampire((nivel.getdim_x()), aleatorio);
 			}
 		}
 		//si puede crear un vampire sw if 0.1
+		//Random random=new Random();
 		
 		
 		
 		public boolean generatevampire() {
 			boolean ok=false;
 			int aleatorio = (int)(Math.random()*10+1); //aleatorio
-			String c=nivel.getname();
+			//String c=nivel.getname();
 			switch(nivel.getname()) {
-				case "EASY":{
+				case "easy":{
 					if (aleatorio == 1) {
 						ok=true;			
 					}
 					break;
 				}
-				case "HARD":{
+				case "hard":{
 					if (aleatorio == 5 || aleatorio==2) {
 						ok=true;			
 					}
 					break;
 				}
-				case "INSANE":{
+				case "insane":{
 					if (aleatorio == 5 || aleatorio==2 || aleatorio==8) {
 						ok=true;			
 					}
@@ -111,7 +112,10 @@ public class Game {
 		public void update() 
 		{
 			
+			this.gameObjectboard.movVampire();
+			attack();
 			addVampire();
+			//this.gameObjectboard.removeDead();
 			this.ciclo++;
 		}
 		public void exit() {
@@ -183,11 +187,17 @@ public class Game {
 			this.gameObjectboard.getListaslayer().getSlayer(k).recibedanno();
 		}
 		
-		///////////////movimiento ////////////////////////////
-		public void movimiento() {
+		public String getBuscarAvatar(int x , int y) {
+			if(this.gameObjectboard.buscarVampireXY(x,y)) {
+				return this.gameObjectboard.iconoVampire();
+			}
+			else if(this.gameObjectboard.buscarSlayer(x,y)) {
+				return this.gameObjectboard.iconoSlayer();
+			}
+			
+			return "";
 			
 		}
-		/////////////////////////////////////////////////////////////
 		
 		public String toString() {//////////////////////TABLERO//////////////////////////////////////////////////////
 			Gameprinter str = new Gameprinter(this,nivel.getdim_x(),nivel.getdim_y());

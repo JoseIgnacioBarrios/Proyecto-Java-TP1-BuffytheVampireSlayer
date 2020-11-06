@@ -9,15 +9,21 @@ public class Gameprinter {
 	String[][] board;
 	final String space = " ";
 	
-	public Gameprinter (Game game, int cols, int rows) {
+	public Gameprinter (Game game, int cols, int rows) {//cols=x ,rows=y
 		this.game = game;
-		this.numRows = rows;
 		this.numCols = cols;
+		this.numRows = rows;
 		this.board=new String[numRows][numCols];
 	}
 	
 	private void encodeGame(Game game) {
-		// TODO fill your code
+		board = new String[this.numRows][this.numCols];
+		for(int i = 0; i < this.numRows; i++) {
+			for(int j = 0; j < this.numCols; j++) {
+				board[i][j] =  space;
+				board[i][j] = this.game.getBuscarAvatar(j, i).toString();
+				}
+		}
 	}
 	
 	 public String toString() {		
@@ -51,6 +57,6 @@ public class Gameprinter {
 		        else str.append(lineEdge);   
 		}
 
-		return str.toString()+"peppitoooooo";
+		return str.toString();
 	    }
 }

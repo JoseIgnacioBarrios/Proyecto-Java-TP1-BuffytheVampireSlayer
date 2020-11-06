@@ -38,7 +38,7 @@ import Logic.Lists.VampireList;
 			return true;
 		}
 
-		public boolean addVampire(int x , int y) {
+		public boolean addVampire(int x , int y) {///agregar if para ver si existe un vampire en esa misma x , y
 			Vampire auxVampire=new Vampire(x, y,game);
 			this.listavampire.add(auxVampire);
 			return true;
@@ -46,19 +46,21 @@ import Logic.Lists.VampireList;
 
 		public boolean finalizo() ///??????????????
 		{
+			//rand = new Random(seed);
 			boolean ok=false;
-			if(listavampire.getContadorvampire()==0 && this.listavampire.getvampireporAparecer()==0 ){
+			if(listavampire.getContadorvampire()<=0 && this.listavampire.getvampireporAparecer()==0 ){
 				ok=true;
 				this.setWinner(ok);
 				return ok;
 			}
-			for (int i=1; i < this.listavampire.getContadorvampire(); i++) {
+			for (int i=1; i <= this.listavampire.getContadorvampire(); i++) {
 				if (this.listavampire.getVampire(i).getXvampire()<=0 ){//x?????
 					ok=true;
 					this.setWinner(ok);
 					return ok;
 				}
 			}
+			
 			return ok;
 		}
 		public boolean getWinner(){
@@ -119,14 +121,18 @@ import Logic.Lists.VampireList;
 		}
 
 		public void movVampire() {
-			for (int i = 1; i < this.listavampire.getContadorvampire(); i++) {
-				for (int j = 1; j < this.listaslayer.getContadorslayer(); j++) {
+			for (int i = 1; i <= this.listavampire.getContadorvampire(); i++) {
+				for (int j = 1; j <= this.listaslayer.getContadorslayer(); j++) {
 					
-					if (!(this.listavampire.getVampire(i).getXvampire()-1==this.listaslayer.getSlayer(j).getXsalyer()&&
-							this.listavampire.getVampire(i).getYvampire()==this.listaslayer.getSlayer(j).getYslayer()))
+					if ((this.listavampire.getVampire(i).getXvampire()-1==this.listaslayer.getSlayer(j).getXsalyer()&&
+							this.listavampire.getVampire(i).getYvampire()==this.listaslayer.getSlayer(j).getYslayer() ))
 						{	
-							this.listavampire.mueve(i);	
+							//this.listavampire.mueve(i);	
 						}
+					else this.listavampire.mueve(i);
+				}
+				if(this.listaslayer.getContadorslayer()<=0) {
+					this.listavampire.mueve(i);
 				}
 			}	
 		}
@@ -139,6 +145,19 @@ import Logic.Lists.VampireList;
 		}
 					
 		//////////////////////////////////////////////
+		public boolean buscarVampireXY(int x,int y) {
+			return this.listavampire.buscarVampireXY(x,y);
+		}
+		public String iconoVampire() {
+			return this.listavampire.iconoVampire();
+		}
+		
+		public boolean buscarSlayer(int x,int y) {
+			return this.listaslayer.buscarSlayer(x,y);
+		}
+		public String iconoSlayer() {
+			return this.listaslayer.iconoSlayer();
+		}
 
 
 
