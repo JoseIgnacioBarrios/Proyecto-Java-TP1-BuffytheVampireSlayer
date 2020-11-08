@@ -2,9 +2,10 @@ package Logic;
 
 //import Logic.Lists.SlayerList;
 //import Logic.Lists.VampireList;
-import Logic.GameObjects.Slayer;
+//import Logic.GameObjects.Slayer;
 import View.Gameprinter;
 import Logic.GameObjects.Player;
+import java.util.Random;
 
 public class Game {
 	
@@ -12,7 +13,7 @@ public class Game {
 	//private SlayerList listaslayer;
 //	private VampireList listavampiro;
 	/////////////////////////////////////////////
-	private int n=0;
+	//private int n=0;
 	private Level nivel;
 	private Long semilla;
 //	private int numX;
@@ -21,66 +22,79 @@ public class Game {
 	private int dimx;
 	private int dimy;
 //	private double frecuencia;
-	private Slayer slayer;
-	
+	//private Slayer slayer;
+	//rand = new Random(seed);
 ////////////////////////////////////////
 	private int ciclo;
 	private Player player;
+	private Random random ;
 	
 		public Game(Long seed, Level level) {
 			this.nivel=level;
-			this.semilla=seed;
+			//this.semilla=seed;
 			inicializaclassvampire();
 			gameObjectboard= new GameObjectBoard(this);
 			//listavampiro=new VampireList(this.numvampire);//
 			ciclo=0;
 			player =new Player();
+			random = new Random(seed);
 		}
 		public Game() {
 			
 		}
-		public boolean addSlayer(int x , int y) {
-			this.gameObjectboard.addSlayer(x, y);
-			return true;
-		}
-		public void addVampire() {
-			int aleatorio = (int)(Math.random()*nivel.getdim_y());//calcular aleatorio
-			
-			if(generatevampire() == true) {
-				this.gameObjectboard.addVampire((nivel.getdim_x()), aleatorio);
+		////////////////////////////////////////
+		public int addSlayer(int x , int y) {
+			int conError=0;
+			if(coinsSuficiente()) 
+			{
+				conError=this.gameObjectboard.addSlayer(x, y);
+				usarCoins();
 			}
+			else conError=2;
+			return conError;
+			 
+			
+		}
+		///////////////////////////////////////////////////////////////////
+		public void addVampire() {
+			//int aleatorio = (int)(Math.random()*nivel.getdim_y());//calcular aleatorio
+			int n = random.nextInt(this.dimy);
+			
+			//if(generatevampire() == true) {
+				this.gameObjectboard.addVampire((nivel.getdim_x()-1), n);
+			//}
 		}
 		//si puede crear un vampire sw if 0.1
 		//Random random=new Random();
 		
 		
 		
-		public boolean generatevampire() {
-			boolean ok=false;
-			int aleatorio = (int)(Math.random()*10+1); //aleatorio
-			//String c=nivel.getname();
-			switch(nivel.getname()) {
-				case "easy":{
-					if (aleatorio == 1) {
-						ok=true;			
-					}
-					break;
-				}
-				case "hard":{
-					if (aleatorio == 5 || aleatorio==2) {
-						ok=true;			
-					}
-					break;
-				}
-				case "insane":{
-					if (aleatorio == 5 || aleatorio==2 || aleatorio==8) {
-						ok=true;			
-					}
-					break;
-				}
-			}
-			return ok;
-		}
+//		public boolean generatevampire() {
+//			boolean ok=false;
+//			int aleatorio = (int)(Math.random()*10+1); //aleatorio
+//			//String c=nivel.getname();
+//			switch(nivel.getname()) {
+//				case "easy":{
+//					if (aleatorio == 1) {
+//						ok=true;			
+//					}
+//					break;
+//				}
+//				case "hard":{
+//					if (aleatorio == 5 || aleatorio==2) {
+//						ok=true;			
+//					}
+//					break;
+//				}
+//				case "insane":{
+//					if (aleatorio == 5 || aleatorio==2 || aleatorio==8) {
+//						ok=true;			
+//					}
+//					break;
+//				}
+//			}
+//			return ok;
+//		}
 		
 		public void inicializaclassvampire() {///solo se ejecute una vez 
 			//this.nivelcad=nivel.getname();
@@ -107,7 +121,14 @@ public class Game {
 		////////////////comandos arr[1]
 		public void reset() 
 		{
+			initObjects();
+		}
+		public void initObjects() {
+			this.gameObjectboard.borrarArraySlayer();
+			this.gameObjectboard.borrarArrayVampire();
 			this.ciclo=0;
+			this.player.reset();
+			//this
 		}
 		public void update() 
 		{
@@ -116,10 +137,14 @@ public class Game {
 			attack();
 			addVampire();
 			//this.gameObjectboard.removeDead();
+			
 			this.ciclo++;
 		}
 		public void exit() {
 			System.exit(0);
+		}
+		public int getCiclo() {
+			return this.ciclo;
 		}
 		////////////////////////////////////////
 		public boolean getWinner(){
@@ -131,60 +156,113 @@ public class Game {
 		{
 			boolean ok=false;
 			if (player.getCoins()>=player.getUsacoins()) {
-				player.usarCoins();
+				//player.usarCoins();
 				ok=true;
-				return ok;
 			}
-			else return ok;
+			return ok;
+		}
+		public void usarCoins() {
+			player.usarCoins();
 		}
 //		public int getxsalyergame() {
 //			return this.slayer.getXsalyer();
 //		}
 		
 		public void attack() 
-		{
-			for(int i=1; i<=this.gameObjectboard.getListavampire().getContadorvampire();i++) {
-				for(int k=1; k<=this.gameObjectboard.getListaslayer().getContadorslayer();k++) {
-					
-					if(		((this.gameObjectboard.getListaslayer().getSlayer(k).getXsalyer()+1)==
-							this.gameObjectboard.getListavampire().getVampire(i).getXvampire()) &&
-							(this.gameObjectboard.getListaslayer().getSlayer(k).getYslayer()==
-							this.gameObjectboard.getListavampire().getVampire(i).getYvampire())
-						
-						)
-						{
-						muerdeaSlayer(k);
-						}
-					if(this.gameObjectboard.getListaslayer().getSlayer(k).getYslayer()==this.gameObjectboard.getListavampire().getVampire(i).getYvampire()) 
-						{
-							if(this.gameObjectboard.tieneVidaslayer(k)==true) 
+		{			
+			boolean disparaSlayer;
+			//ATACA SLAYER SI EXISTEN
+			if (this.gameObjectboard.getContadorslayer()!=0) { 
+			//IF HAYA VAMPIROS
+				if (this.gameObjectboard.getContadorvampire()!=0) {					
+					for(int i = 0; i < this.gameObjectboard.getContadorslayer(); i++)
+					{	
+						disparaSlayer = true;
+						int j = 0;
+						//IF TENGA BALAS CADA SLAYER
+						while (j < this.gameObjectboard.getContadorvampire() && disparaSlayer)
+						{							
+							//IF VAMPIRE ESTE EN LA MISMA FILA						
+							if(this.gameObjectboard.getYsalyer(i) == this.gameObjectboard.getVampireY(j))
 							{
-								if(this.gameObjectboard.tieneVidaVampire(i)==true) {
-									if(this.gameObjectboard.tieneBala(k)==true) {
-										disparaaVampire(i);
-										this.gameObjectboard.restaBala(k);
-									}
-									
+								//IF VAMPIRE TENGA VIDA
+								if(this.gameObjectboard.tieneVidaVampire(j) == true)
+								{
+									disparaaVampire(j);
+									//this.gameObjectboard.restaBala(i);
+									disparaSlayer = false;									
 								}
-								
+							}
+							j++;
+						}
+					}
+				}	
+			}
+			
+			//ATACA VAMPIROS SI EXISTEN
+			if (this.gameObjectboard.getContadorvampire()!=0) { 
+				//IF SI HAY SLAYERS
+					if (this.gameObjectboard.getContadorslayer()!=0) {					
+						for(int i = 0; i < this.gameObjectboard.getContadorvampire(); i++)
+						{	
+							for(int j = 0; j < this.gameObjectboard.getContadorslayer(); j++)	
+							{							
+								//IF SLAYER ESTA DELANTE DEL VAMPIRO						
+								if(((this.gameObjectboard.getXsalyer(j)+1) == this.gameObjectboard.getVampireX(i)) &&
+									(this.gameObjectboard.getYsalyer(j) == this.gameObjectboard.getVampireY(i)))
+								{
+
+									muerdeaSlayer(j);
+								}
+								j++;
 							}
 						}
+					}	
 				}
-				
-			}
-			////////////////recarga bala
-			for (int j=1;j<=this.gameObjectboard.getListaslayer().getContadorslayer();j++) {
-				this.gameObjectboard.recargaBala(j);
-			}
+			
+			//ATACA VAMPIRE			
+//			for(int i=1; i<=this.gameObjectboard.getContadorvampire();i++) {
+//				for(int k=1; k<=this.gameObjectboard.getContadorslayer();k++) {
+//					
+//					if(		((this.gameObjectboard.getXsalyer(k)+1)==
+//							this.gameObjectboard.getVampireX(i)) &&
+//							(this.gameObjectboard.getYsalyer(k)==
+//							this.gameObjectboard.getVampireY(i))
+//						
+//						)
+//						{
+//						muerdeaSlayer(k);
+//						}
+//					if(this.gameObjectboard.getYsalyer(k)==this.gameObjectboard.getVampireY(i)) 
+//						{
+//							if(this.gameObjectboard.tieneVidaslayer(k)==true) 
+//							{
+//								if(this.gameObjectboard.tieneVidaVampire(i)==true) {
+//									if(this.gameObjectboard.tieneBala(k)==true) {
+//										disparaaVampire(i);
+//										this.gameObjectboard.restaBala(k);
+//									}
+//									
+//								}
+//								
+//							}
+//						}
+//				}
+//				
+//			}
+//			////////////////recarga bala
+//			for (int j=0;j<=this.gameObjectboard.getContadorslayer();j++) {
+//				this.gameObjectboard.recargaBala(j);
+//			}
 			
 		}
 		
 		public void disparaaVampire(int i) {
-			this.gameObjectboard.getListavampire().getVampire(i).recibedannoVampire();
+			this.gameObjectboard.recibedannoVampire(i);
 		}
 		
 		public void muerdeaSlayer(int k) {
-			this.gameObjectboard.getListaslayer().getSlayer(k).recibedanno();
+			this.gameObjectboard.recibedannoSlayer(k);
 		}
 		
 		public String getBuscarAvatar(int x , int y) {
@@ -203,10 +281,10 @@ public class Game {
 			Gameprinter str = new Gameprinter(this,nivel.getdim_x(),nivel.getdim_y());
 			
 			String estado;
-			estado = "Number of cycles: "  +"\n"  + 
-			"Coins: "  +"\n"  + 
+			estado = "Number of cycles: "  +this.ciclo+"\n"  + 
+			"Coins: "  +this.player.getCoins()+"\n"  + 
 			"Remainig vampires: "+this.gameObjectboard.getvampireporAparecer() +"\n" +
-			"Vampire on the board: "+"\n"+
+			"Vampire on the board: "+this.gameObjectboard.getContadorvampire()+"\n"+
 			str.toString();
 			return estado;
 		}

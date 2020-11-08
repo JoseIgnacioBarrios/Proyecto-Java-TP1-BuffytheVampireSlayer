@@ -1,11 +1,11 @@
 package Logic.GameObjects;
 import Logic.Game;
-import Logic.Level;
+//import Logic.Level;
 
 public class Vampire {
 	
-	private String nivel;
-	private int numVampire;
+	//private String nivel;
+	//private int numVampire;
 	private int x;
     private int y;
     private int vida;
@@ -13,7 +13,8 @@ public class Vampire {
     private final int turnosMoverse;
     private final int danno;
     private Game game;
-    private Level level;
+    //private Level level;
+    private boolean mueve;
     
     public Vampire(int x, int y,Game game){//?????????????????????debe saberlo los x,y,nivel
 //    	this.nivel=nivel;
@@ -26,6 +27,7 @@ public class Vampire {
     	 this.casillaMoverse = 1;
     	 this.turnosMoverse = 2;
     	 this.danno = 1;
+    	 this.mueve=true;
     }
    
   
@@ -65,6 +67,16 @@ public class Vampire {
 	public void recibedannoVampire() {
 		this.vida-=this.danno;
 	}
+	public void mueveCambio() {
+		if (this.mueve)
+			this.mueve=false;
+		else this.mueve=true;
+	}
+	public boolean getmueve()
+	{
+		return this.mueve;
+	}
+
 	public String toString() {
 		return "V ["+this.vida+"]";
 	}

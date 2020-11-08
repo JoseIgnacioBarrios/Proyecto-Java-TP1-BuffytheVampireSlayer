@@ -1,5 +1,5 @@
 package Logic.GameObjects;
-import Logic.Game;
+//import Logic.Game;
 
 public class Player {
 	private int coins;
@@ -15,6 +15,7 @@ public class Player {
 	}
 	public void usarCoins() 
 	{
+		
 		this.coins-=this.usacoins;
 	}
 	

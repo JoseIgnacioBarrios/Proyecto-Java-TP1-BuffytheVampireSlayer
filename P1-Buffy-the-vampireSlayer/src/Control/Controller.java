@@ -1,7 +1,7 @@
 package Control;
 import java.util.Scanner;
 import Logic.Game;
-import Logic.GameObjects.*;
+//import Logic.GameObjects.*;
 
 public class Controller {
 
@@ -34,10 +34,11 @@ public class Controller {
 
     private Game game;
     private Scanner scanner;
-    
+    private int conError;
     public Controller(Game game, Scanner scanner) {
 	    this.game = game;
 	    this.scanner = scanner;
+	    conError=0;
     }
     
 //    public String printGame() {
@@ -109,19 +110,43 @@ public class Controller {
 	    				(Integer.parseInt(arg[1])<= game.getDimx()) && (Integer.parseInt(arg[2])<=game.getDimy())
     					)
 	    			{
-	    				if (game.coinsSuficiente()==true)///si tiene suficiente monedas
-	    				{
-	    					//System.out.println("estoy dentro de add");
-		    				this.game.addSlayer(Integer.parseInt(arg[1]), Integer.parseInt(arg[2]));
-		    				System.out.println("[DEBUG] Executing: "+arg[0]+" "+arg[1]+" "+arg[2]);
-		    				ok=true;
-	    				}
-	    				else 
-	    				{
-	    					System.out.println(" coins insuficiente "+"\n");
-	    					game.update();
-	    				}
-	    				
+////	    				if (game.coinsSuficiente()==true)///si tiene suficiente monedas
+////	    				{
+//	    					//System.out.println("estoy dentro de add");
+//		    				if(this.game.addSlayer(Integer.parseInt(arg[1]), Integer.parseInt(arg[2]))){
+//		    					
+//		    					System.out.println("[DEBUG] Executing: "+arg[0]+" "+arg[1]+" "+arg[2]);
+//		    					game.usarCoins();
+//		    					ok=true;
+//		    				}
+//		    				else {
+//		    					System.out.println("[DEBUG] Executing: "+arg[0]+" "+arg[1]+" "+arg[2]);
+//		    					System.out.println("[ERROR]: Invalid position");
+//		    				}
+//	    				}
+//	    				else 
+//	    				{
+//	    					System.out.println(" coins insuficiente "+"\n");
+//	    					game.update();
+//	    				}
+	    				this.conError= this.game.addSlayer(Integer.parseInt(arg[1]), Integer.parseInt(arg[2]));
+	    				//System.out.println(this.conError);
+	    				switch (this.conError) {
+						case 0:
+							System.out.println("[DEBUG] Executing: "+arg[0]+" "+arg[1]+" "+arg[2]);
+	    					ok=true;
+							break;
+						case 1:
+							System.out.println("[DEBUG] Executing: "+arg[0]+" "+arg[1]+" "+arg[2]);
+	    					System.out.println("[ERROR]: Invalid position");
+	    					ok=false;
+							break;
+						case 2:
+							System.out.println(" coins insuficiente "+"\n");
+							ok=false;
+							break;
+						}
+	    				game.update();
 	    			}
 	    		}
 	    	}

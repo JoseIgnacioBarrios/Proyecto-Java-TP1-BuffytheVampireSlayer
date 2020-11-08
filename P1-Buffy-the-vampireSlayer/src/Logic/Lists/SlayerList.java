@@ -5,7 +5,7 @@ import Logic.GameObjects.Slayer;
 
 public class SlayerList {
 	
-	private int contadorslayer=0;//el numero de slayer que se agregaron en la tabla
+	private int contadorslayer;//el numero de slayer que se agregaron en la tabla
 	private int numslayer;//el maximo de Slayer que puede haber
 	private int x;
 	private int y;
@@ -15,21 +15,29 @@ public class SlayerList {
 	
 	public SlayerList(int numslayer) {
 		this.numslayer=numslayer;
-		slayerList = new Slayer[this.numslayer+1];//max posile de slayer
+		slayerList = new Slayer[this.numslayer];//max posile de slayer
+		this.contadorslayer=0;
 	}
 	///////////////////////////////
 	public void add(Slayer slayer) {
-		if(this.contadorslayer<=numslayer) {
-			this.contadorslayer++;
-			slayerList[this.contadorslayer] = slayer;
+		if(this.contadorslayer<numslayer) {
 			//this.contadorslayer++;
+			slayerList[this.contadorslayer] = slayer;
+			this.contadorslayer++;
+		
 		}
 	}
-	public Slayer getSlayer(int x) {//devuelve vampire de la pos X
-		return this.slayerList[x];
-	}
+//	public Slayer getSlayer(int x) {//devuelve vampire de la pos X
+//		return this.slayerList[x];
+//	}
 	public int getContadorslayer() {
 		return contadorslayer;
+	}
+	public int getXsalyer(int x) {
+		return this.slayerList[x].getXsalyer();
+	}
+	public int getYsalyer(int y) {
+		return this.slayerList[y].getYslayer();
 	}
 	//	public int getnumvampire() //el numero maximo de slayer
 //	{
@@ -51,7 +59,7 @@ public class SlayerList {
 		this.slayerList[k].restabala();
 	}
 	
-	public void recibedanno(int i) {
+	public void recibedannoSlayer(int i) {
 		this.slayerList[i].recibedanno();
 	}
 	public void recargaBala(int j) {
@@ -67,13 +75,23 @@ public class SlayerList {
 	public boolean buscarSlayer(int x,int y) {
 		this.x=x;
 		this.y=y;
-		for (int i=1;i<=this.contadorslayer;i++) {
-			if(this.slayerList[i].getXsalyer()==this.x && this.slayerList[i].getYslayer()==this.y) {
-				this.v=i;
-				return true;
+		boolean ok=false;
+		if(this.contadorslayer!=0) {	
+			for (int i=0;i<this.contadorslayer;i++) {
+				if(this.slayerList[i].getXsalyer()==this.x && this.slayerList[i].getYslayer()==this.y) {
+					this.v=i;
+					ok= true;
+				}
 			}
+		//ok= false;
 		}
-		return false;
+		return ok;
+	}
+	public void borrarArraySlayer() {
+		for (int i = this.contadorslayer; i >=0; i--) {
+			this.slayerList[i]=null;
+		}
+		this.contadorslayer=0;
 	}
 	public String iconoSlayer(){
 		return this.slayerList[this.v].toString();
