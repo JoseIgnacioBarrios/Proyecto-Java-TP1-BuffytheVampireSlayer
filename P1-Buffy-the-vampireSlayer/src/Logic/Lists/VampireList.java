@@ -11,39 +11,27 @@ public class VampireList {
 	private int y;
 	private int v;
 	private boolean ok;
+	private int cont;
 	
 	public VampireList(int numvampire) {
 		this.numvampire=numvampire;
 		vampireList = new Vampire[numvampire];
 		this.contador=0;
 		vampireporAparecer();
+		 cont=0;
 	}
-//	public void numvampires(int numvampire){
-//		//this.numvampire=numvampire;
-//		vampireList =new Vampire[numvampire];
-//	}
 	
 	public void add(Vampire vampire) {
 		if(contador<numvampire) {
-			//contador++;
 			vampireList[contador] = vampire;
 			contador++;
 			vampireporAparecer();///////////???'
-			//this.numvampire--;			
+			cont++;
 		}
 	}
 	public void vampireporAparecer() {
 		this.vampireporAparecer=this.numvampire - this.contador;
 	}
-	
-
-//	public Vampire[] getVampireList() {
-//		return vampireList;
-//	}
-
-//	public void setVampireList(Vampire[] vampireList) {
-//		this.vampireList = vampireList;
-//	}
 	
 	public int getVampireX(int x) {//devuelve vampire de la pos X	
 		return this.vampireList[x].getXvampire();
@@ -55,12 +43,6 @@ public class VampireList {
 		this.vampireList[i].recibedannoVampire();
 	}
 	
-	//public boolean tieneVidaslayer(int i) {//comprueba si tiene vida para quitarle desde GOB
-	//	if(this.slayerList[i].get_vida()>0) {
-	//		return true;
-	//	}
-	//	return false;
-	//}
 	public boolean tieneVidaVampire(int k) {
 		boolean ok=false;
 		if (this.vampireList[k].getVida()>0) {
@@ -68,13 +50,6 @@ public class VampireList {
 		}
 		return ok;
 	}
-//	private boolean tieneVidaVampire2(int k) {
-//		boolean ok=false;
-//		if (this.vampireList[k].getVida()>=0) {
-//			ok=true;
-//		}
-//		return ok;
-//	}
 	public void remove() {
 		this.ok=false;
 		boolean recorrido=true;
@@ -91,12 +66,13 @@ public class VampireList {
 						{
 							this.vampireList[i]=null;
 							this.contador--;
+							//vampireporAparecer();
 							aux++;
 						}
 						else 
 						{
 							this.vampireList[i]=this.vampireList[i+1];
-							aux++;
+							//aux++;
 						}
 					}
 					recorrido=false;
@@ -152,6 +128,17 @@ public class VampireList {
 	}
 	public void mueveCambio(int x) {
 		this.vampireList[x].mueveCambio();
+	}
+	public boolean todoVivos() {
+		boolean ok = false;
+		int i = 0;
+		while(!ok && i < this.contador) {
+			if(this.vampireList[i].getVida()==0) {
+				ok = true;
+			}
+			i++;
+		}
+		return ok;
 	}
 	
 	public String iconoVampire(){

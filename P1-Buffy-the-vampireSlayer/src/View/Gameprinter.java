@@ -9,7 +9,7 @@ public class Gameprinter {
 	String[][] board;
 	final String space = " ";
 	
-	public Gameprinter (Game game, int cols, int rows) {//cols=x ,rows=y
+	public Gameprinter (Game game, int cols, int rows) {
 		this.game = game;
 		this.numCols = cols;
 		this.numRows = rows;

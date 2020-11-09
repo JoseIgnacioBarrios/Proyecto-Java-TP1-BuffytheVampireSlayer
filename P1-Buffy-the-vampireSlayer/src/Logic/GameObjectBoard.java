@@ -23,13 +23,14 @@ import Logic.Lists.VampireList;
 		//private Level nivel;
 		private boolean ganaBM;	
 		private int ent;
-		
+		private int cont;
 		
 		public GameObjectBoard (Game game) {//SlayerList listaslayer,Game game) {
 			//this.//listaslayer = listaslayer;//
 			this.game=game;
 			listavampire=new VampireList(game.getNumvampire());//
 			listaslayer = new SlayerList(espacioparaSlayer());
+			this.cont=0;
 		}
 		public int espacioparaSlayer() {
 			return this.ent=(this.game.getDimx()*game.getDimy())-game.getDimy();
@@ -72,9 +73,13 @@ import Logic.Lists.VampireList;
 				//System.out.println("celdaVampire");
 				Vampire auxVampire=new Vampire(x, y,game);
 				this.listavampire.add(auxVampire);
+				this.cont++;
 				ok=true;
 			}
 			return ok;
+		}
+		public int cont() {
+			return this.cont;
 		}
 		public boolean celdaLibreVmapire(int x,int y) {
 			boolean encontrado=true;
@@ -93,31 +98,35 @@ import Logic.Lists.VampireList;
 			return encontrado;
 		}
 
-		public boolean finalizo() ///??????????????
-		{
+		
+		public boolean ganaVampiro() {
+			boolean ok = false;
 			
-			boolean ok=false;
-			if(listavampire.getContadorvampire()<=0 && this.listavampire.getvampireporAparecer()==0 ){
-				ok=true;
-				this.setWinner(ok);
-				return ok;
-			}
+			//GANAN VAMPIROS
 			if(this.listavampire.getContadorvampire()!=0) {
 				for (int i=0; i < this.listavampire.getContadorvampire(); i++) {
-					if (this.listavampire.getVampireX(i)==0 ){//x?????
-						ok=true;
-						this.setWinner(ok);
-						return ok;
+					if (this.listavampire.getVampireX(i) < 0 ) {//x?????
+						ok = true;
+						break;//false si gana vampiro
 					}
 				}
 			}
-			if(this.listavampire.ganoSlayer())
-			{
-				
-				this.setWinner(false);
+			
+			return ok;
+		}
+		
+		public boolean ganaJugador() {
+			boolean ok = false;
+			
+			//GANA JUGADOR
+			if(listavampire.getContadorvampire() == 0) {
+				return true;
 			}
 			return ok;
 		}
+			
+		
+			
 		public boolean getWinner(){
 			return this.ganaBM;
 		}
@@ -128,28 +137,6 @@ import Logic.Lists.VampireList;
 		public int getvampireporAparecer() {
 			return this.listavampire.getvampireporAparecer();
 		}
-//		public int getContadorvampire() {
-//			return this.listavampire.getContador();
-//		}
-//		public void muevevampire() {
-//			for (int i=1;i<=this.listavampire.getContadorvampire() ;i++) {
-//				if(this.si) {
-//					
-//				}
-//			}
-//		}
-//		public void hayDelanteSlayer(int j) {
-//			for(int i=1; i<=this.listavampire.getContadorvampire();i++) {
-//				for(int k=1; k<=this.listaslayer.getContadorslayer();k++) {
-//					this.listaslayer.getSlayer(i)
-//				}
-//				
-//			}
-//		}
-
-//		public VampireList getListavampire() {
-//			return this.listavampire;
-//		}
 		public int getContadorvampire() {
 			return this.listavampire.getContadorvampire();
 		}
@@ -163,9 +150,6 @@ import Logic.Lists.VampireList;
 			this.listavampire.recibedannoVampire(i);
 		}
 
-//		public SlayerList getListaslayer() {
-//			return this.listaslayer;
-//		}
 		public int getContadorslayer() {
 			return this.listaslayer.getContadorslayer();
 		}
@@ -195,84 +179,56 @@ import Logic.Lists.VampireList;
 		}
 		
 		////////////////mov/////////////////////////
-//		public void update() {
-//			
-//		}
 
-		public void movVampire() {
-			
+
+		public void movVampire() 
+		{
 			if(this.listavampire.getContadorvampire()!=0) 
 			{
 				for (int i = 0; i < this.listavampire.getContadorvampire(); i++) 
 				{
-					muevecambioVampire(i);
-					if (this.listavampire.getmueve(i)) 
+					this.listavampire.mueveCambio(i);
+					if (this.listavampire.getmueve(i)==true) 
 					{
 						if (this.listaslayer.getContadorslayer()!=0)
 						{
-							for (int j = 0; j < this.listaslayer.getContadorslayer(); j++) 
+							boolean ok=false;
+							boolean encontrado=true;
+							int j=0;
+							while(j< this.listaslayer.getContadorslayer() && encontrado)
 							{
-								if(this.listaslayer.getXsalyer(j)+1==this.listavampire.getVampireX(i) &&
-										this.listaslayer.getYsalyer(j)==this.listavampire.getVampireY(i))
-								{
-									
+								if (this.listavampire.getVampireX(i)-1==this.listaslayer.getXsalyer(j)) {
+									if(this.listavampire.getVampireY(i)==this.listaslayer.getYsalyer(j)) {
+										//this.listavampire.mueve(i);
+										this.listavampire.mueveCambio(i);
+										encontrado=false;
+										ok=true;
+									}
 								}
-								else {this.listavampire.mueve(i);}
+								j++;
+							}
+							if(ok==false)
+							{
+								this.listavampire.mueve(i);
 							}
 						}
-						else {this.listavampire.mueve(i);}
+						else {
+							this.listavampire.mueve(i);
+						}
 					}
 				}
 			}
-//				if(this.listavampire.getContadorvampire()!=0) {
-//					for (int i = 0; i < this.listavampire.getContadorvampire(); i++) {
-//						if(this.listavampire.mueveVampire(i)) {
-//							if(this.listaslayer.getContadorslayer()!=0) {
-//								for (int j = 0; j < this.listaslayer.getContadorslayer(); j++) {
-//								
-//									if ((this.listavampire.getVampireX(i)-1==this.listaslayer.getXsalyer(j)&&
-//										this.listavampire.getVampireY(i)==this.listaslayer.getYsalyer(j) ))
-//									{	
-//										//this.listavampire.mueve(i);	
-//									}
-//								else {
-//									this.listavampire.mueve(i);
-//									//muevecambioVampire(i);
-//								}
-//							}
-//						}
-//						else this.listavampire.mueve(i);
-//						
-//							//this.listavampire.mueve(i);
-//			//				if(this.listaslayer.getContadorslayer()<=0) {
-//			//					this.listavampire.mueve(i);
-//			//				}
-//						muevecambioVampire(i);
-//						}
-//						else {
-//							muevecambioVampire(i);
-//						}
-//					}
-//				}
-			}
-		public void muevecambioVampire(int x) {
-			
-			this.listavampire.mueveCambio(x);
 		}	
 		
 		public void removeDead() {
-//			for (int i = 0; i < this.listavampire.getContadorvampire(); i++) {
-//				for (int j = 0; j < this.listaslayer.getContadorslayer(); j++) {
-					this.listavampire.remove();
-					this.listaslayer.removeSlayer();
-				//}
-			//}
+			this.listaslayer.removeSlayer();
+			this.listavampire.remove();
 		}
 		public void borrarArraySlayer() {
 			this.listaslayer.borrarArraySlayer();
 		}
 		public void borrarArrayVampire() {
-			//this.listavampire.se
+			
 			this.listavampire.borrarArrayVampire();
 		}
 		//////////////////////////////////////////////

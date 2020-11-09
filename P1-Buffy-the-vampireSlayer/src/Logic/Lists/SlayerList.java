@@ -27,9 +27,6 @@ public class SlayerList {
 		
 		}
 	}
-//	public Slayer getSlayer(int x) {//devuelve vampire de la pos X
-//		return this.slayerList[x];
-//	}
 	public int getContadorslayer() {
 		return contadorslayer;
 	}
@@ -39,10 +36,6 @@ public class SlayerList {
 	public int getYsalyer(int y) {
 		return this.slayerList[y].getYslayer();
 	}
-	//	public int getnumvampire() //el numero maximo de slayer
-//	{
-//		return this.numslayer;
-//	}
 	public boolean tieneVidaslayer(int i) {//comprueba si tiene vida para quitarle desde GOB
 		if(this.slayerList[i].get_vida()>0) {
 			return true;
@@ -65,13 +58,6 @@ public class SlayerList {
 	public void recargaBala(int j) {
 		this.slayerList[j].recargaBala();
 	}
-//	public int recorrido() {//////preguntar cuando sea cero puedo poner in if para compara si es null en la pos 0 del array????
-//		int x=0;
-//		for (int i=0;i>this.contadorslayer;i++) {
-//			return x=i;
-//		}
-//		return x;
-//	}
 	public boolean buscarSlayer(int x,int y) {
 		this.x=x;
 		this.y=y;
@@ -83,7 +69,6 @@ public class SlayerList {
 					ok= true;
 				}
 			}
-		//ok= false;
 		}
 		return ok;
 	}
