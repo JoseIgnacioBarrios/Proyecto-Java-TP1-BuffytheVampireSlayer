@@ -10,7 +10,7 @@ public class Vampire {
     private int y;
     private int vida;
     private final int casillaMoverse;
-    private final int turnosMoverse;
+    //private final int turnosMoverse;
     private final int danno;
     private Game game;
     //private Level level;
@@ -22,15 +22,13 @@ public class Vampire {
     	this.x= x;
     	this.y= y;
     	this.game = game;
-    	
-    	 this.vida=3;
+    	this.vida=5;
     	 this.casillaMoverse = 1;
-    	 this.turnosMoverse = 2;
+    	 //this.turnosMoverse = 2;
     	 this.danno = 1;
     	 this.mueve=true;
     }
    
-  
     public int atacar() {
     	return danno;
     }
@@ -46,9 +44,9 @@ public class Vampire {
 		return casillaMoverse;
 	}
 	
-	public int getTurnosMoverse() {
-		return turnosMoverse;
-	}
+//	public int getTurnosMoverse() {
+//		return turnosMoverse;
+//	}
 	public int getXvampire() {
 		return this.x;
 	}

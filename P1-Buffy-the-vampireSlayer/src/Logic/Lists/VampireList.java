@@ -10,6 +10,7 @@ public class VampireList {
 	private int x;
 	private int y;
 	private int v;
+	private boolean ok;
 	
 	public VampireList(int numvampire) {
 		this.numvampire=numvampire;
@@ -61,13 +62,53 @@ public class VampireList {
 	//	return false;
 	//}
 	public boolean tieneVidaVampire(int k) {
+		boolean ok=false;
 		if (this.vampireList[k].getVida()>0) {
-			return true;
+			ok=true;
 		}
-		return false;
+		return ok;
 	}
-	public void remove(int k) {
-		if(tieneVidaVampire(k)) {}
+//	private boolean tieneVidaVampire2(int k) {
+//		boolean ok=false;
+//		if (this.vampireList[k].getVida()>=0) {
+//			ok=true;
+//		}
+//		return ok;
+//	}
+	public void remove() {
+		this.ok=false;
+		boolean recorrido=true;
+		int j=0;
+		int aux=0;
+		while(j<this.contador && recorrido)
+		{
+				if(tieneVidaVampire(j)==false)
+				{		
+					this.vampireList[j]=null;
+					for (int i = j; i < this.contador; i++) 
+					{
+						if((i+1)==this.contador) 
+						{
+							this.vampireList[i]=null;
+							this.contador--;
+							aux++;
+						}
+						else 
+						{
+							this.vampireList[i]=this.vampireList[i+1];
+							aux++;
+						}
+					}
+					recorrido=false;
+				}
+			j++;
+		}
+		if(aux==this.numvampire) {
+			this.ok=true;
+		}
+	}
+	public boolean ganoSlayer() {
+		return this.ok;
 	}
 	public int getContadorvampire() {//gett
 		return this.contador;
@@ -100,7 +141,7 @@ public class VampireList {
 	}
 	
 	public void borrarArrayVampire() {
-		for (int i = this.contador; i >=0; i--) {
+		for (int i = this.contador-1; i >=0; i--) {
 			this.vampireList[i]=null;
 		}
 		this.contador=0;

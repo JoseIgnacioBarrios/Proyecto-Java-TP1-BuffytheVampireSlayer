@@ -15,7 +15,7 @@ public class Game {
 	/////////////////////////////////////////////
 	//private int n=0;
 	private Level nivel;
-	private Long semilla;
+	//private Long semilla;
 //	private int numX;
 //	private String nivelcad;
 	private int numvampire;
@@ -27,7 +27,7 @@ public class Game {
 ////////////////////////////////////////
 	private int ciclo;
 	private Player player;
-	private Random random ;
+	private Random randin ;
 	
 		public Game(Long seed, Level level) {
 			this.nivel=level;
@@ -37,7 +37,7 @@ public class Game {
 			//listavampiro=new VampireList(this.numvampire);//
 			ciclo=0;
 			player =new Player();
-			random = new Random(seed);
+			randin = new Random(seed);
 		}
 		public Game() {
 			
@@ -48,7 +48,7 @@ public class Game {
 			if(coinsSuficiente()) 
 			{
 				conError=this.gameObjectboard.addSlayer(x, y);
-				usarCoins();
+				//usarCoins();
 			}
 			else conError=2;
 			return conError;
@@ -58,11 +58,18 @@ public class Game {
 		///////////////////////////////////////////////////////////////////
 		public void addVampire() {
 			//int aleatorio = (int)(Math.random()*nivel.getdim_y());//calcular aleatorio
-			int n = random.nextInt(this.dimy);
+			int n = this.randin.nextInt(this.dimy);
 			
-			//if(generatevampire() == true) {
+			if(generatevampire() == true) {
 				this.gameObjectboard.addVampire((nivel.getdim_x()-1), n);
-			//}
+			}
+		}
+		private boolean  generatevampire() {
+			boolean ok=false;
+			if (this.randin.nextDouble() < this.nivel.getvampireFrequency()) {
+				ok=true;
+			}
+			return ok;
 		}
 		//si puede crear un vampire sw if 0.1
 		//Random random=new Random();
@@ -132,26 +139,22 @@ public class Game {
 		}
 		public void update() 
 		{
-			
+			//ciclo();
 			this.gameObjectboard.movVampire();
 			attack();
 			addVampire();
-			//this.gameObjectboard.removeDead();
-			
+			this.gameObjectboard.removeDead();
+			ciclo();
+		}
+		public void ciclo() {
 			this.ciclo++;
+			generarcoins();
 		}
-		public void exit() {
-			System.exit(0);
+		public void generarcoins() {
+			if((this.randin.nextFloat()>0.5)) {
+				this.player.setcoins();
+			}
 		}
-		public int getCiclo() {
-			return this.ciclo;
-		}
-		////////////////////////////////////////
-		public boolean getWinner(){
-			return this.gameObjectboard.getWinner();
-		}
-		
-		
 		public boolean coinsSuficiente() 
 		{
 			boolean ok=false;
@@ -164,6 +167,19 @@ public class Game {
 		public void usarCoins() {
 			player.usarCoins();
 		}
+		public void exit() {
+			System.exit(0);
+		}
+//		public int getCiclo() {
+//			return this.ciclo;
+//		}
+		////////////////////////////////////////
+		public boolean getWinner(){
+			return this.gameObjectboard.getWinner();
+		}
+		
+		
+		
 //		public int getxsalyergame() {
 //			return this.slayer.getXsalyer();
 //		}
@@ -211,8 +227,10 @@ public class Game {
 								if(((this.gameObjectboard.getXsalyer(j)+1) == this.gameObjectboard.getVampireX(i)) &&
 									(this.gameObjectboard.getYsalyer(j) == this.gameObjectboard.getVampireY(i)))
 								{
-
-									muerdeaSlayer(j);
+									if(this.gameObjectboard.tieneVidaslayer(j)) 
+									{
+										muerdeaSlayer(j);
+									}	
 								}
 								j++;
 							}
@@ -277,14 +295,15 @@ public class Game {
 			
 		}
 		
+		
 		public String toString() {//////////////////////TABLERO//////////////////////////////////////////////////////
 			Gameprinter str = new Gameprinter(this,nivel.getdim_x(),nivel.getdim_y());
 			
 			String estado;
 			estado = "Number of cycles: "  +this.ciclo+"\n"  + 
 			"Coins: "  +this.player.getCoins()+"\n"  + 
-			"Remainig vampires: "+this.gameObjectboard.getvampireporAparecer() +"\n" +
-			"Vampire on the board: "+this.gameObjectboard.getContadorvampire()+"\n"+
+			"Remaining vampires: "+this.gameObjectboard.getvampireporAparecer() +"\n" +
+			"Vampires on the board: "+this.gameObjectboard.getContadorvampire()+"\n"+
 			str.toString();
 			return estado;
 		}

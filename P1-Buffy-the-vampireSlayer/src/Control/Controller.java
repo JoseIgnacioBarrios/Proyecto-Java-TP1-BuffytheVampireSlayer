@@ -57,20 +57,24 @@ public class Controller {
     		//System.out.println(this.printGame());
     		if(ok) {
     			printGame();
+    			//game.update();
     		}
-			System.out.print(prompt);
+    		//game.update();
+			System.out.println(prompt);
 			String scaner = scanner.nextLine();
 			String auxscaner = scaner.toLowerCase();
 			String scaner1 = auxscaner.trim();
 			String[] arg = scaner1.split(" ");
-	    	
+			//game.update();
 	    	if (arg.length==1||arg[0]=="")
 	    	{
 	    		if(arg[0].equalsIgnoreCase(reset) || arg[0].equalsIgnoreCase(none) || arg[0].equalsIgnoreCase(help) || arg[0].equalsIgnoreCase(exit)||
 	    				arg[0].equalsIgnoreCase("R") || arg[0].equalsIgnoreCase("N") || arg[0].equalsIgnoreCase("H") || arg[0].equalsIgnoreCase("E")||
 	    				arg[0].equalsIgnoreCase("")){
-					if(arg[0].equals(reset)){
+					if(arg[0].equalsIgnoreCase(reset)|| arg[0].equalsIgnoreCase("r")){
+						System.out.println("[DEBUG] Executing: "+arg[0]);
 						this.game.reset();
+						ok=true;
 					}
 					else if(arg[0].equalsIgnoreCase(none)|| arg[0].equalsIgnoreCase("N")||arg[0].equalsIgnoreCase("")){
 						System.out.println("[DEBUG] Executing: "+arg[0]);
@@ -80,6 +84,7 @@ public class Controller {
 					else if(arg[0].equalsIgnoreCase(help) || arg[0].equalsIgnoreCase("h")){
 						System.out.println("[DEBUG] Executing: "+arg[0]);
 						System.out.println(helpMsg);
+						//game.update();
 						ok=false;
 					}
 					else if(arg[0].equalsIgnoreCase(exit) || arg[0].equalsIgnoreCase("e")){
@@ -87,19 +92,20 @@ public class Controller {
 						System.out.println(nobodywins);
 						this.game.exit();
 					}
-					else if(arg[0].equalsIgnoreCase(reset) || arg[0].equalsIgnoreCase("r")){
-						System.out.println("[DEBUG] Executing: "+arg[0]);
-						this.game.reset();
-						ok=true;
+//					else if(arg[0].equalsIgnoreCase(reset) || arg[0].equalsIgnoreCase("r")){
+//						System.out.println("[DEBUG] Executing: "+arg[0]);
+//						this.game.reset();
+//						ok=true;
 //						System.out.println(" GAME OVER ");
 //						//System.exit(0);
 //						this.game.exit();
-					}
+					//}
 				}
 	    		else {
 	    			System.out.println("[DEBUG] Executing: "+arg[0]);
 	    			System.out.println(unknownCommandMsg);
 	    			ok=false;
+	    			//game.update();
 	    		}
 	    	}
 	    	else if(arg.length==3)
@@ -107,7 +113,7 @@ public class Controller {
 	    		if(arg[0].equalsIgnoreCase(add)||arg[0].equalsIgnoreCase("a"))
 	    		{
 	    			if( (Integer.parseInt(arg[1])>= 0) && (Integer.parseInt(arg[2])>=0) && 
-	    				(Integer.parseInt(arg[1])<= game.getDimx()) && (Integer.parseInt(arg[2])<=game.getDimy())
+	    				(Integer.parseInt(arg[1])< game.getDimx()-1) && (Integer.parseInt(arg[2])<=game.getDimy()-1)
     					)
 	    			{
 ////	    				if (game.coinsSuficiente()==true)///si tiene suficiente monedas
@@ -134,24 +140,32 @@ public class Controller {
 	    				switch (this.conError) {
 						case 0:
 							System.out.println("[DEBUG] Executing: "+arg[0]+" "+arg[1]+" "+arg[2]);
+							game.update();
 	    					ok=true;
 							break;
+							
 						case 1:
 							System.out.println("[DEBUG] Executing: "+arg[0]+" "+arg[1]+" "+arg[2]);
 	    					System.out.println("[ERROR]: Invalid position");
 	    					ok=false;
 							break;
 						case 2:
-							System.out.println(" coins insuficiente "+"\n");
+							System.out.println("[DEBUG] Executing: "+arg[0]+" "+arg[1]+" "+arg[2]);
+							System.out.println("[ERROR]: Not enough coins");
 							ok=false;
 							break;
 						}
-	    				game.update();
+	    				
+	    			}
+	    			else {
+						System.out.println("[DEBUG] Executing: "+arg[0]+" "+arg[1]+" "+arg[2]);
+    					System.out.println("[ERROR]: Invalid position");
+    					ok=false;
 	    			}
 	    		}
 	    	}
 			
-//			this.game.addVampire();
+
     	}
     	if(this.game.finalizo()){
 			System.out.println(game.toString());

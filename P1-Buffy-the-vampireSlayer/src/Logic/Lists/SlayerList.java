@@ -93,8 +93,34 @@ public class SlayerList {
 		}
 		this.contadorslayer=0;
 	}
+	public void removeSlayer() {
+		boolean recorrido=true;
+		int j=0;
+		while(j<this.contadorslayer && recorrido)
+		{
+				if(tieneVidaslayer(j)==false)
+				{		
+					this.slayerList[j]=null;
+					for (int i = j; i < this.contadorslayer; i++) 
+					{
+						if((i+1)==this.contadorslayer) 
+						{
+							this.slayerList[i]=null;
+							this.contadorslayer--;
+						}
+						else 
+						{
+							this.slayerList[i]=this.slayerList[i+1];
+						}
+					}
+					recorrido=false;
+				}
+			j++;
+		}
+	}
 	public String iconoSlayer(){
 		return this.slayerList[this.v].toString();
 		
 	}
+	
 }

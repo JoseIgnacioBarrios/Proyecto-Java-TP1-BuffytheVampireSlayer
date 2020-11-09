@@ -40,7 +40,7 @@ import Logic.Lists.VampireList;
 			if(celdaLibre(x,y)) {
 				Slayer auxslayer=new Slayer( x, y,game);
 				this.listaslayer.add(auxslayer);
-				
+				this.game.usarCoins();
 			}
 			else conError=1;
 			return conError;
@@ -110,6 +110,11 @@ import Logic.Lists.VampireList;
 						return ok;
 					}
 				}
+			}
+			if(this.listavampire.ganoSlayer())
+			{
+				
+				this.setWinner(false);
 			}
 			return ok;
 		}
@@ -190,9 +195,9 @@ import Logic.Lists.VampireList;
 		}
 		
 		////////////////mov/////////////////////////
-		public void update() {
-			
-		}
+//		public void update() {
+//			
+//		}
 
 		public void movVampire() {
 			
@@ -256,11 +261,12 @@ import Logic.Lists.VampireList;
 		}	
 		
 		public void removeDead() {
-			for (int i = 0; i < this.listavampire.getContadorvampire(); i++) {
-				for (int j = 0; j < this.listaslayer.getContadorslayer(); j++) {
-					
-				}
-			}
+//			for (int i = 0; i < this.listavampire.getContadorvampire(); i++) {
+//				for (int j = 0; j < this.listaslayer.getContadorslayer(); j++) {
+					this.listavampire.remove();
+					this.listaslayer.removeSlayer();
+				//}
+			//}
 		}
 		public void borrarArraySlayer() {
 			this.listaslayer.borrarArraySlayer();
