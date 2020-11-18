@@ -2,7 +2,9 @@ package Logic;
 
 public class Game {
 	
-	public Game(Long seed, Level level) {}
+	public Game(Long seed, Level level) {
+		
+	}
 	
 	public boolean isFinished() {
 		return true;
