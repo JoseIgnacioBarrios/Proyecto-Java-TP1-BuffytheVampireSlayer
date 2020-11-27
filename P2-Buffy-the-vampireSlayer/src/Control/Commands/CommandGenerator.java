@@ -20,7 +20,7 @@ public class CommandGenerator {
 	}
 	public static String commandHelp() {
 		for (int i = 0; i < availableCommands.length; i++) {
-			
+			return availableCommands[i].helpText();
 		}
 		return null;
 	}

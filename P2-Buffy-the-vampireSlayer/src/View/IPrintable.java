@@ -2,6 +2,6 @@ package View;
 
 public interface IPrintable {
 	
-	String getPositionToString(int x, int y);
-	String getInfo();
+	public String getPositionToString(int x, int y);
+	public String getInfo();
 }
