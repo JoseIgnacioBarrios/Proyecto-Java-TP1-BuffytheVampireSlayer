@@ -36,13 +36,35 @@ public class GameObjectList {
 		}
 		return " ";
 	}
-	
+	public GameObject obje(int x,int y) {
+		
+		if(gameobjects!=null) {
+			for (GameObject e : gameobjects) {
+					if(e.getX()==x&&e.getY()==y && e.isAlive()) {
+						return e;
+					}
+				}
+			}
+		return null;
+	}
+	public void attacklis() {
+		if(gameobjects!=null) {
+			for (GameObject e : gameobjects) {
+				e.attack();
+			}
+		}
+	}
 	public void add(GameObject object) {
 		this.gameobjects.add(object);
 	}
 	
 	public String getWinnerMessage() {
 		return null;
+	}
+
+
+	public void move() {
+		
 	}
 	
 	

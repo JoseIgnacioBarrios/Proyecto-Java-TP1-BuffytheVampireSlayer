@@ -2,6 +2,7 @@ package Logic;
 
 //import java.util.ArrayList;
 import Logic.GameObjects.GameObject;
+import Logic.GameObjects.IAttack;
 import Logic.Lists.GameObjectList;
 
 
@@ -53,6 +54,17 @@ public class GameObjectBoard {
 	}
 	public int limitevampire() {
 			return this.game.getVanporaparecer()-this.game.getcontVampire();
+	}
+	public void move() {
+		this.objectLista.move();
+	}
+	public  IAttack getAttackableInPosition(int x, int y) {
+		// TODO Auto-generated method stub
+		return (IAttack)this.objectLista.obje(x,y);
+	}
+	public void attack() {
+		// TODO Auto-generated method stub
+		this.objectLista.attacklis();
 	}
 
 

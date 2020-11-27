@@ -1,6 +1,7 @@
 package Logic;
 import java.util.Random;
 
+import Logic.GameObjects.IAttack;
 //import Logic.GameObjects.GameObject;
 import Logic.GameObjects.Player;
 import Logic.GameObjects.Slayer;
@@ -60,6 +61,8 @@ public class Game implements IPrintable {
 
 	public void update() {
 		generaCoins();
+		this.gameObjectboard.move();
+		this.gameObjectboard.attack();
 		this.gameObjectboard.addVampire();
 	}
 
@@ -83,6 +86,10 @@ public class Game implements IPrintable {
 //	public int getPrecio() {
 //		return this.player.getPrecio();
 //	}
+	public IAttack getAttackableInPosition(int x, int y) {
+		
+		return this.gameObjectboard.getAttackableInPosition(x,y);
+	}
 	public Random getRand() {
 		return rand;
 	}
