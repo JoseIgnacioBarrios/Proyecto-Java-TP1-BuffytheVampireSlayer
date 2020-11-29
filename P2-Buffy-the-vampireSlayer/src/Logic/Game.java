@@ -50,6 +50,8 @@ public class Game implements IPrintable {
 		if (this.player.getCoins()>=this.player.getPrecio()){
 		this.gameObjectboard.add(new Slayer(x,y,this));
 		this.player.usarCoins();
+		update();
+		this.errorAdd=2;
 		}
 		else this.errorAdd=1;
 	}
@@ -62,11 +64,15 @@ public class Game implements IPrintable {
 		
 	}
 	public void exit() {
-		
+		System.exit(0);
 	}
 
 	public void reset() {
-				
+		this.gameObjectboard.clear();
+		Vampire.setVampireEliminado(0);
+		Vampire.setVampiretablero(0);
+		this.ciclo=0;
+		this.player.reset();
 	}
 
 	public void update() {
@@ -80,10 +86,10 @@ public class Game implements IPrintable {
 
 	public String getWinnerMessage() {
 		if(this.quien) {
-			String cad="Gano Vampire";
+			String cad="Vampires win!";
 			return cad;
 		}
-		else {String cad="Gano Slayer";
+		else {String cad="Slayer win!";
 			return cad;}
 	}
 	public void initGame() {
@@ -126,7 +132,7 @@ public class Game implements IPrintable {
 		return this.level.getNumberOfVampires();
 	}
 	public boolean rangomaxdelSlayer(int x, int y) {
-		return x>=0 && x<this.level.getDimX()-1 && y>=0 && y<this.level.getDimY();
+		return x>=0 && x<this.level.getDimX() && y>=0 && y<this.level.getDimY();
 	}
 	public boolean celdaVacia(int x, int y) {
 		return gameObjectboard.celdaVacia(x,y);

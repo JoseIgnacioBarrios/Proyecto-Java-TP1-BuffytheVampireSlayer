@@ -19,10 +19,11 @@ public class CommandGenerator {
 		return null;
 	}
 	public static String commandHelp() {
-		for (int i = 0; i < availableCommands.length; i++) {
-			return availableCommands[i].helpText();
+		String cad="";
+		for (Command command : availableCommands) {
+			cad=cad + command.helpText();//+ '\n';
 		}
-		return null;
+		return cad;
 	}
 
 }

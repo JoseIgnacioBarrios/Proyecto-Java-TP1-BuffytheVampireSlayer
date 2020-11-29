@@ -28,6 +28,14 @@ public class Vampire extends GameObject{
 		return vampireEliminado;
 	}
 
+	public static void setVampiretablero(int vampiretablero) {
+		Vampire.vampiretablero = vampiretablero;
+	}
+
+	public static void setVampireEliminado(int vampireEliminado) {
+		Vampire.vampireEliminado = vampireEliminado;
+	}
+
 	public int getVampireporaparecer() {
 		return vampireporaparecer;
 	}
@@ -35,7 +43,7 @@ public class Vampire extends GameObject{
 	public void vampireporaparecerSum() {
 		if(isAlive()==false) {
 			this.vampireporaparecer++;
-			vampireEliminado=this.vampireporaparecer;
+			vampireEliminado++;//=this.vampireporaparecer;
 		}	
 	}
 
@@ -56,7 +64,7 @@ public class Vampire extends GameObject{
 	public String toString() {
 		
 	
-		String	 cadena = "V"+"["+this.vida+"]";
+		String	 cadena = "V"+" "+"["+this.vida+"]";
 		
 		
 		return cadena;

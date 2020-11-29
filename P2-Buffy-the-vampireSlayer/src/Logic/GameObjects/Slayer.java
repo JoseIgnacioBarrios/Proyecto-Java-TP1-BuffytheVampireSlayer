@@ -31,7 +31,7 @@ public class Slayer extends GameObject{
 
 	@Override
 	public String toString() {
-		String cadena = "S"+"["+this.vida+"]";
+		String cadena = "S"+" "+"["+this.vida+"]";
 		return cadena;
 	}
 

@@ -4,14 +4,14 @@ import Logic.Game;
 
 public class ResetCommand extends Command{
 	public ResetCommand() {
-		super("R","reset","[R]eset","reset game%n");
+		super("R","reset","[R]eset","reset gamen");
 	}
 
 	@Override
 	public boolean execute(Game game) {
 		// TODO Auto-generated method stub
 		game.reset();
-		return false;
+		return true;
 	}
 
 	@Override

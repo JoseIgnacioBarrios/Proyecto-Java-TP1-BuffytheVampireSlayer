@@ -80,6 +80,10 @@ public class GameObjectBoard {
 	public int vampireporaparecerSum() {
 		return this.objectLista.getvampireporaparecerSum();
 	}
+	public void clear() {
+		this.objectLista.clear();
+		
+	}
 
 
 	

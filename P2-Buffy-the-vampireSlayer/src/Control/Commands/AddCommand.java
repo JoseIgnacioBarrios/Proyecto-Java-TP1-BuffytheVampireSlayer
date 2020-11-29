@@ -32,22 +32,24 @@ public class AddCommand extends Command {
 			System.out.println("[ERROR]: Invalid position");
 			 return ok=false;
 		case 1:
-			System.out.println("[DEBUG] Executing: "+this.arg+" "+x+" "+y+"1");
+			//System.out.println("[DEBUG] Executing: "+this.arg+" "+x+" "+y+"1");
 			System.out.println("[ERROR]: Not enough coins");
 			 return ok=false;
+		default: return ok;
 		}
 
-		return ok;
+		//return ok;
 	}
 
 	@Override
 	public Command parse(String[] commandWords) {
 		// TODO Auto-generated method stub
-		this.arg1=commandWords[1];
-		this.arg2=commandWords[2];
+
 		if(commandWords.length==3 ) {
+			this.arg1=commandWords[1];
+			this.arg2=commandWords[2];
 			//if(commandWords.length<4) {
-				if(matchCommandName(commandWords[0])&&validaNUmeros(this.arg1)&&validaNUmeros(arg2)) {
+				if(matchCommandName(commandWords[0])&&validaNUmeros(this.arg1)&&validaNUmeros(this.arg2)) {
 //					if((Integer.parseInt(commandWords[1])>= 0) && (Integer.parseInt(commandWords[2])>=0) 
 //	//	    			(Integer.parseInt(commandWords[1])< game.getDimx()-1) && 
 //	//	    			(Integer.parseInt(commandWords[2])<=game.getDimy()-1)

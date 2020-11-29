@@ -134,6 +134,12 @@ public class GameObjectList {
 		}
 		return 0;
 	}
+
+
+	public void clear() {
+		this.gameobjects.clear();
+		
+	}
 	
 	
 	

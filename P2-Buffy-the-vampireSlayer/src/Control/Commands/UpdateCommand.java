@@ -4,7 +4,7 @@ import Logic.Game;
 
 public class UpdateCommand extends Command{
 	public UpdateCommand() {
-		super("N","","[N]one | []","update%n");
+		super("N","","[N]one | []","update");
 	}
 
 	@Override
