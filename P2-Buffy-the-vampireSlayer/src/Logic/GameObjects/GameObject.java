@@ -31,8 +31,9 @@ public abstract class GameObject implements IAttack{
 	}
 	public abstract void attack();
 	public abstract String toString();
-	public abstract String getWinnerMessage();
 	public abstract void mov();
+	public abstract void vampireporaparecerSum();
+	public abstract int getVampireporaparecer();
 	public boolean isAlive() {
 		if(this.vida>0)
 		{

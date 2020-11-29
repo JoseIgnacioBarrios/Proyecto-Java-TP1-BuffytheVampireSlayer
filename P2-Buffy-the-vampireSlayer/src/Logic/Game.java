@@ -19,6 +19,7 @@ public class Game implements IPrintable {
 	private int cont;
 	private int vanporaparecer;
 	private int errorAdd;
+	private boolean quien;
 	
 	public Game(Long seed, Level level) {
 		this.rand=new Random(seed);
@@ -34,7 +35,16 @@ public class Game implements IPrintable {
 	}
 	
 	public boolean isFinished() {
-		return false;
+		boolean ok=false;
+		if(this.gameObjectboard.llegometa()) {
+			ok= true;
+			this.quien=true;
+		}
+		else if (Vampire.getVampiretablero()-Vampire.getvampireEliminado()==0&&this.level.getNumberOfVampires()-Vampire.getVampiretablero()==0) {
+			ok= true;
+			this.quien=false;
+		}
+		return ok;
 	}
 	public void add(int x,int y) {
 		if (this.player.getCoins()>=this.player.getPrecio()){
@@ -64,11 +74,17 @@ public class Game implements IPrintable {
 		this.gameObjectboard.move();
 		this.gameObjectboard.attack();
 		this.gameObjectboard.addVampire();
+		this.gameObjectboard.remove();
+		if(!isFinished()){this.ciclo++;}
 	}
 
 	public String getWinnerMessage() {
-		String cad=this.gameObjectboard.getWinnerMessage();
-		return cad;
+		if(this.quien) {
+			String cad="Gano Vampire";
+			return cad;
+		}
+		else {String cad="Gano Slayer";
+			return cad;}
 	}
 	public void initGame() {
 		
@@ -90,6 +106,10 @@ public class Game implements IPrintable {
 		
 		return this.gameObjectboard.getAttackableInPosition(x,y);
 	}
+	public IAttack getPositiondelante(int x, int y) {
+		
+		return this.gameObjectboard.getPositiondelante(x,y);
+	}
 	public Random getRand() {
 		return rand;
 	}
@@ -106,7 +126,7 @@ public class Game implements IPrintable {
 		return this.level.getNumberOfVampires();
 	}
 	public boolean rangomaxdelSlayer(int x, int y) {
-		return x>=0 && x<this.level.getDimX() && y>=0 && y<this.level.getDimY();
+		return x>=0 && x<this.level.getDimX()-1 && y>=0 && y<this.level.getDimY();
 	}
 	public boolean celdaVacia(int x, int y) {
 		return gameObjectboard.celdaVacia(x,y);
@@ -133,7 +153,7 @@ public class Game implements IPrintable {
 	
 	@Override
 	public String getPositionToString(int x, int y) {
-		String cad=this.gameObjectboard.objetoEnPosicion(x, y);
+		String cad=this.gameObjectboard.objetoImagenTablero(x, y);
 		return cad;
 		
 	}
@@ -143,10 +163,17 @@ public class Game implements IPrintable {
 		String estado;
 		estado = "Number of cycles: "  +this.ciclo+"\n"  + 
 		"Coins: "  +this.player.getCoins()+"\n"  + 
-		"Remaining vampires: "+ limitevampire()+"\n" +
-		"Vampires on the board: "+ Vampire.getVampiretablero()+"\n";
+		"Remaining vampires: "+(this.level.getNumberOfVampires()-Vampire.getVampiretablero())+"\n" +
+		"Vampires on the board: "+ (Vampire.getVampiretablero()-Vampire.getvampireEliminado())+"\n";
 		return estado;
 	}
+
+	public boolean getceldaVacia(int x, int y) {
+		
+		return this.gameObjectboard.celdaVacia(x, y);
+	}
+
+	
 
 
 

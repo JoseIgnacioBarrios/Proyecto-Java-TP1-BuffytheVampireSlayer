@@ -10,7 +10,6 @@ public class Player {
 	public Player(Random ran) {//No podemos tener referencia a game
 		this.coins = coinsreset;
 		this.ran=ran;
-		
 	}
 	public void usarCoins() 
 	{

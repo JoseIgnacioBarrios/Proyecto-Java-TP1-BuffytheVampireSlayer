@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 //import Logic.GameObjectBoard;
 import Logic.GameObjects.GameObject;
+//import Logic.GameObjects.IAttack;
 
 public class GameObjectList {
 	private ArrayList<GameObject> gameobjects;
@@ -24,7 +25,7 @@ public class GameObjectList {
 		return ok;
 	}
 	
-	public String objetoEnPosicion(int x, int y) {
+	public String objetoImagenTablero(int x, int y) {
 		
 		if(gameobjects!=null) {
 			for (GameObject e : gameobjects) {
@@ -64,7 +65,74 @@ public class GameObjectList {
 
 
 	public void move() {
+		if(gameobjects!=null) {
+			for (GameObject e : gameobjects) {
+				e.mov();
+			}
+		}
 		
+	}
+	public GameObject getPositiondelante(int x, int y) {
+		if(gameobjects!= null) {
+			for (GameObject e : gameobjects) {
+					if(e.getX() == x && e.getY()==y && e.isAlive()) {
+						return null;
+					}
+					else return e;
+				}
+			}
+		return null;
+	}
+	public GameObject objetoS() {
+		if(gameobjects!=null) {
+			for (GameObject e : gameobjects) {
+						return e;
+				}
+			}
+		return null;
+	}
+	public void remove() {
+		if(gameobjects!=null) {
+//			for (GameObject e : gameobjects) {
+//				if(e.isAlive()==false) {
+//					gameobjects.remove(e);
+//				}
+//			}
+			ArrayList<GameObject> shouldBeRemoved = new ArrayList<GameObject>();
+			for (GameObject e : gameobjects) {
+			    if (e.isAlive()) {
+			       
+			    }
+			    else  {
+			    	e.vampireporaparecerSum();
+			    	shouldBeRemoved.add(e);}
+			    	
+			}
+			gameobjects.removeAll(shouldBeRemoved);
+		}
+	}
+	//////////////
+	public boolean llegometa() {
+		boolean ok=false;
+		if(gameobjects!=null) {
+			for (GameObject e : gameobjects) {
+				if(e.getX()<0) {
+					return ok= true;
+				}
+			}
+			
+		}
+		return ok;
+	}
+
+
+	public int getvampireporaparecerSum() {
+		if(gameobjects!=null) {
+			for (GameObject e : gameobjects) {
+				return e.getVampireporaparecer();
+			}
+		}
+		return 0;
 	}
 	
 	

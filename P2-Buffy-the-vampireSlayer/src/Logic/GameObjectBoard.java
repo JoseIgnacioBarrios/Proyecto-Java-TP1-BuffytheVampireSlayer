@@ -4,7 +4,7 @@ package Logic;
 import Logic.GameObjects.GameObject;
 import Logic.GameObjects.IAttack;
 import Logic.Lists.GameObjectList;
-
+//import Logic.Game;
 
 
 public class GameObjectBoard {
@@ -36,9 +36,9 @@ public class GameObjectBoard {
 		return objectLista.celdaVacia(x, y);
 	}
 	
-	public String objetoEnPosicion(int x, int y) {
+	public String objetoImagenTablero(int x, int y) {
 		
-		return objectLista.objetoEnPosicion(x, y);
+		return objectLista.objetoImagenTablero(x, y);
 	}
 	public String getWinnerMessage() {
 		
@@ -53,7 +53,7 @@ public class GameObjectBoard {
 		return ok;
 	}
 	public int limitevampire() {
-			return this.game.getVanporaparecer()-this.game.getcontVampire();
+			return this.game.getVanporaparecer()- this.game.getcontVampire();
 	}
 	public void move() {
 		this.objectLista.move();
@@ -65,6 +65,20 @@ public class GameObjectBoard {
 	public void attack() {
 		// TODO Auto-generated method stub
 		this.objectLista.attacklis();
+	}
+	public IAttack getPositiondelante(int x, int y) {
+		// TODO Auto-generated method stub
+		return (IAttack)this.objectLista.getPositiondelante(x,y);
+	}
+	public void remove() {
+		this.objectLista.remove();		
+	}
+	/////////////////////
+	public boolean llegometa() {
+		return this.objectLista.llegometa();
+	}
+	public int vampireporaparecerSum() {
+		return this.objectLista.getvampireporaparecerSum();
 	}
 
 

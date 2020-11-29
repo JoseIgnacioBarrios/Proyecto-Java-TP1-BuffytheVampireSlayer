@@ -16,13 +16,14 @@ public class Slayer extends GameObject{
 			for (int i = x+1; i < this.g.getDimX(); i++) {
 				IAttack other = this.g.getAttackableInPosition(i, this.y);
 				if (other != null && other.receiveSlayerAttack(HARM)) {
+					
 					break;
 				}//.receiveVampireAttack(HARM);
 			}
 		}
 		
 	}
-	public boolean receiveVampireAttack() {
+	public boolean receiveVampireAttack(int HARM) {
 		this.vida-=HARM;
 		return true;
 		
@@ -34,15 +35,24 @@ public class Slayer extends GameObject{
 		return cadena;
 	}
 
-	@Override
-	public String getWinnerMessage() {
-		// TODO Auto-generated method stub
-		return null;
-	}
+
 
 	@Override
 	public void mov() {
 		// TODO Auto-generated method stub
+	}
+
+	@Override
+	public void vampireporaparecerSum() {
+		
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public int getVampireporaparecer() {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 	
 	
