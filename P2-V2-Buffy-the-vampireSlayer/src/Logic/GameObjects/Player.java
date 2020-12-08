@@ -22,7 +22,7 @@ public class Player {
 	public void reset() {
 		this.coins=this.coinsreset;
 	}
-	
+
 	
 	public int getPrecio() {
 		return coinsreset;
@@ -34,7 +34,13 @@ public class Player {
 		this.coins=this.coins+this.sumacoins;
 	}
 	public void sumarcoinsBlook(int z) {
-		this.coins=this.coins+z;
+		this.coins=(int) (this.coins+(z*0.1));
+	}
+	public void usargarlicpush() {
+		this.coins=this.coins-this.sumacoins;
+	}
+	public void superCoins() {
+		this.coins=this.coins+1000;
 	}
 
 }

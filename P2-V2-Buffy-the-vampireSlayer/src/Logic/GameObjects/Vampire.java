@@ -41,8 +41,8 @@ public class Vampire extends GameObject{
 	}
 	
 	public void vampireporaparecerSum() {
-		if(isAlive()==false) {
-			this.vampireporaparecer++;
+		if(this.vida==0) {
+			//this.vampireporaparecer++;
 			vampireEliminado++;//=this.vampireporaparecer;
 		}	
 	}
@@ -52,7 +52,9 @@ public class Vampire extends GameObject{
 		if (isAlive () ) {
 			IAttack other = this.g.getAttackableInPosition(this.x-1, this.y);
 			if (other != null ) {
-			other.receiveVampireAttack(HARM);}
+			other.receiveVampireAttack(HARM);
+			//this.muevete=true;
+			}
 		}
 	}
 	public boolean receiveSlayerAttack(int HARM) {
@@ -77,7 +79,7 @@ public class Vampire extends GameObject{
 				if (ok == false ) {
 					//mueveteCambio();
 					if(this.muevete==true) {
-						moveIA2();
+						//moveIA2();
 					//mueveteCambio();
 					}
 				}
@@ -102,6 +104,23 @@ public class Vampire extends GameObject{
 			this.muevete=false;
 		else this.muevete=true;
 	}
+	public boolean receiveGarlicPush() {
+		if(this.g.celdaVacia(this.x+1, this.y)) {
+			if(this.x+1>=this.g.getDimX()) {
+				this.vida=0;
+			}
+			else {
+				this.x++;
+				this.muevete=true;
+			}
+		}
+		return true;
+	}
+	public boolean receiveLightFlash() {
+		this.vida=0;
+		return true;
+	}
+	
 
 
 

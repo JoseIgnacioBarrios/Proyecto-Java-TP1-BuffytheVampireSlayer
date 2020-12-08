@@ -140,6 +140,27 @@ public class GameObjectList {
 		this.gameobjects.clear();
 		
 	}
+
+
+	public void garlicPussh() {
+		if(gameobjects!=null) {
+			for (GameObject e : gameobjects) {
+				e.receiveGarlicPush();
+			}
+		}
+		
+		
+	}
+
+
+	public void lightFlash() {
+		if(gameobjects!=null) {
+			for(GameObject e: gameobjects) {
+				e.receiveLightFlash();
+			}
+		}
+		
+	}
 	
 	
 	

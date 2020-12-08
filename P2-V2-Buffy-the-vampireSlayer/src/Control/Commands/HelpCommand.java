@@ -6,7 +6,7 @@ public class HelpCommand extends Command{
 
 	public HelpCommand() {
 		// TODO Auto-generated constructor stub
-		super("Help", "H", "[H]elp", "show this help");
+		super("Help", "H", "[h]elp", "show this help");
 	}
 
 	@Override

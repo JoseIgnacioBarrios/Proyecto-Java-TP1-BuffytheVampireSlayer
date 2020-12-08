@@ -4,12 +4,15 @@ public class CommandGenerator {
 	
 	private static Command[] availableCommands= {
 			new AddCommand(),
-			new AddVampireCommand(),
-			new AddBloodBankCommand(),
 			new HelpCommand(),
 			new ResetCommand(),
 			new ExitCommand(),
-			new UpdateCommand()
+			new UpdateCommand(),
+			new GarlicPushCommand(),
+			new LightFlashCommand(),
+			new AddBloodBankCommand(),
+			new SuperCoinsCommand(),
+			new AddVampireCommand()
 	};
 	public static Command parseCommand(String[ ] commandWords) {
 		
@@ -21,7 +24,7 @@ public class CommandGenerator {
 		return null;
 	}
 	public static String commandHelp() {
-		String cad="";
+		String cad="Available commands:"+"\n";
 		for (Command command : availableCommands) {
 			cad=cad + command.helpText();//+ '\n';
 		}

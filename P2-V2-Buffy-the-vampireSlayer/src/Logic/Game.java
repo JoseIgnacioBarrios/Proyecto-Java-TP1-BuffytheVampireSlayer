@@ -24,6 +24,7 @@ public class Game implements IPrintable {
 	private int errorAdd;
 	private int errorAddVampire;
 	private boolean quien;
+	private int o=0;
 	
 	public Game(Long seed, Level level) {
 		this.rand=new Random(seed);
@@ -66,40 +67,60 @@ public class Game implements IPrintable {
 
 	public void addVampire(int x,int y) {
 		if(celdaVacia(x, y)) {
-			if(this.gameObjectboard.podravampire()) {
-				this.gameObjectboard.add(new Vampire(x,y,this));
-				//this.cont++;
+			if(this.gameObjectboard.limitedracula(x, y)) {
+				if(this.gameObjectboard.podravampire()) {
+					this.gameObjectboard.add(new Vampire(x,y,this));
+					//this.cont++;
+				}
 			}
+			else this.errorAddVampire=0;
 		}
 	}
 	public void addDracula(int x, int y) {
 		if(celdaVacia(x, y)) {
-			if(!Dracula.getVivodracula()) {
-				if(this.gameObjectboard.podravampire()) {
-					this.gameObjectboard.add(new Dracula(x,y,this));
-					Dracula.setVivodraculaCambio();
+			if (this.gameObjectboard.limitedracula(x, y)) {
+				if(!Dracula.getVivodracula()) {
+					if(this.gameObjectboard.podravampire()) {
+						this.gameObjectboard.add(new Dracula(x,y,this));
+						Dracula.setVivodraculaCambio();
+						this.errorAddVampire=4;
+					}
+					else this.errorAddVampire=0;
+					
 				}
-				
+				else this.errorAddVampire=2; 
 			}
-			else this.errorAddVampire=1; 
+			else this.errorAddVampire=0;
 		}
+		else this.errorAddVampire=0;
 	}
 	public void addExplosiveVampire(int x, int y) {
 		if(celdaVacia(x, y)) {
-			this.gameObjectboard.add(new ExplosiveVampire(x,y,this));
-			//Dracula.setVivodraculaCambio();
+			if(this.gameObjectboard.limitedracula(x, y)) {
+				this.gameObjectboard.add(new ExplosiveVampire(x,y,this));
+				//Dracula.setVivodraculaCambio();
+				this.errorAddVampire=4;
+			}
+			else this.errorAddVampire=0;
 		}
+		else this.errorAddVampire=0;
 		
 	}
 	public boolean addBloodBank(int x, int y, int z) {
 		if(celdaVacia(x, y)) {
 			if(this.player.getCoins()>=z) {
-				if(gameObjectboard.limiteBlood(x,y))
+				if(gameObjectboard.limiteBlood(x,y)) {
 				this.player.usarCoinsBlood(z);
 				this.gameObjectboard.add(new BloodBank(x,y,z,this));
+				update();
+				this.errorAddVampire=4;
 				return true;
+				}
+				else this.errorAddVampire=0;
 			}
+			else this.errorAddVampire=1;
 		}
+		else this.errorAddVampire=0;
 		return false;
 		
 	}
@@ -220,13 +241,44 @@ public class Game implements IPrintable {
 		estado = "Number of cycles: "  +this.ciclo+"\n"  + 
 		"Coins: "  +this.player.getCoins()+"\n"  + 
 		"Remaining vampires: "+(this.level.getNumberOfVampires()-Vampire.getVampiretablero())+"\n" +
-		"Vampires on the board: "+ (Vampire.getVampiretablero()-Vampire.getvampireEliminado())+"\n";
+		"Vampires on the board: "+ tablero()+"\n"+
+		draculavive();
 		return estado;
 	}
-
+	public int tablero() {
+		return o=Vampire.getVampiretablero()-Vampire.getvampireEliminado();
+	}
 	public boolean getceldaVacia(int x, int y) {
 		
 		return this.gameObjectboard.celdaVacia(x, y);
+	}
+
+	public void garlicPush() {
+		if(this.player.getCoins()>=10) {
+			this.gameObjectboard.garlicPush();
+			this.player.usargarlicpush();
+			update();
+			
+		}
+	}
+
+	public void lightFlash() {
+		if(this.player.getCoins()>=this.player.getPrecio()) {
+			this.gameObjectboard.lightFlash();
+			update();
+		}		
+	}
+
+	public void superCoins() {
+		this.player.superCoins();
+		
+	}
+	public String draculavive() {
+		String cad="";
+		if(Dracula.getVivodracula()) {
+			return cad="Dracula is alive";
+		}
+		return cad;
 	}
 
 	

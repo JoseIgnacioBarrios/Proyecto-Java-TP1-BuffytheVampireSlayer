@@ -14,11 +14,19 @@ public class BloodBank extends GameObject{
 		// TODO Auto-generated method stub
 		
 	}
-
+	public boolean receiveVampireAttack(int HARM) {
+		this.vida=0;
+		return true;
+		
+	}
+	public boolean receiveDraculaAttack(){
+		this.vida=0;
+		return true;
+	}
 	@Override
 	public String toString() {
-		// TODO Auto-generated method stub
-		return null;
+		String cadena = "B"+" "+"["+this.z+"]";
+		return cadena;
 	}
 
 	@Override
@@ -31,7 +39,6 @@ public class BloodBank extends GameObject{
 	@Override
 	public void vampireporaparecerSum() {
 		// TODO Auto-generated method stub
-		
 	}
 
 	@Override

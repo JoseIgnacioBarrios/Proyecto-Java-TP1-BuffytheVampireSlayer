@@ -4,7 +4,7 @@ import Logic.Game;
 
 public class ExitCommand extends Command{
 	public ExitCommand() {
-		super("Exit","E","[e]xit"," exit game");
+		super("Exit","E","[e]xit","exit game");
 	}
 
 	@Override

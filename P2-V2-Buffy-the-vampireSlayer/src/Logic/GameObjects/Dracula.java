@@ -26,7 +26,16 @@ public class Dracula extends Vampire{
 		return cadena;
 	}
 
-	
+	public boolean receiveSlayerAttack(int HARM) {
+		if(isAlive()) {
+		this.vida-=HARM;
+		}
+		if(this.vida==0) {
+			setVivodraculaCambio();
+		}
+		return true;
+		
+	}
 	
 	public static boolean getVivodracula() {
 		return vivodracula;
@@ -34,6 +43,9 @@ public class Dracula extends Vampire{
 	public static void setVivodraculaCambio() {
 		if(vivodracula)vivodracula=false;
 		else vivodracula=true;
+	}
+	public boolean receiveLightFlash() {
+		return false;
 	}
 
 

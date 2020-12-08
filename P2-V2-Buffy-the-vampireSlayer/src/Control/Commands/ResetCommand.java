@@ -4,7 +4,7 @@ import Logic.Game;
 
 public class ResetCommand extends Command{
 	public ResetCommand() {
-		super("R","reset","[R]eset","reset gamen");
+		super("R","reset","[r]eset","reset game");
 	}
 
 	@Override

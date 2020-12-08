@@ -2,21 +2,22 @@ package Control.Commands;
 
 import Logic.Game;
 
-public class UpdateCommand extends Command{
-	public UpdateCommand() {
-		super("N","","[n]one | []","update");
+public class LightFlashCommand extends Command{
+
+	public LightFlashCommand() {
+		super("l", "light", "[l]ight", "kills all the vampires");
+		// TODO Auto-generated constructor stub
 	}
 
 	@Override
 	public boolean execute(Game game) {
 		// TODO Auto-generated method stub
-		game.update();
+		game.lightFlash();
 		return true;
 	}
 
 	@Override
 	public Command parse(String[] commandWords) {
-		// TODO Auto-generated method stub
 		if(commandWords.length==1) {
 			if(matchCommandName(commandWords[0])) {
 				return this;
@@ -24,6 +25,5 @@ public class UpdateCommand extends Command{
 		}
 		return null;
 	}
-	
 
 }

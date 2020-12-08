@@ -110,6 +110,19 @@ public class GameObjectBoard {
 		}
 		return false;
 	}
+	public boolean limitedracula(int x, int y) {
+		if(this.game.getDimX()-1>=x&&x>=0&&y>=0&&this.game.getDimY()>=y) {
+			return true;
+		}
+		return false;
+	}
+	public void garlicPush() {
+		this.objectLista.garlicPussh();
+		
+	}
+	public void lightFlash() {
+		this.objectLista.lightFlash();		
+	}
 	
 	
 	
