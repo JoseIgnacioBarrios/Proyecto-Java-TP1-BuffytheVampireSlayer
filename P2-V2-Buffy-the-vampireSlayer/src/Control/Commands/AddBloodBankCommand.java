@@ -10,7 +10,7 @@ public class AddBloodBankCommand extends Command{
 	private String arg2;
 	private String arg3;
 	public AddBloodBankCommand() {
-		super("B", "b", "[b]ank <x><y><z>", "add a blood bank with cost z in position x, y.");
+		super("B", "b", "[b]ank <x> <y> <z>", "add a blood bank with cost z in position x, y.");
 		// TODO Auto-generated constructor stub
 	}
 

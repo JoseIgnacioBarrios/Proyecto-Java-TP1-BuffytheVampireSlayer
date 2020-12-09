@@ -70,6 +70,7 @@ public class Game implements IPrintable {
 			if(this.gameObjectboard.limitedracula(x, y)) {
 				if(this.gameObjectboard.podravampire()) {
 					this.gameObjectboard.add(new Vampire(x,y,this));
+					this.errorAddVampire=4;
 					//this.cont++;
 				}
 			}

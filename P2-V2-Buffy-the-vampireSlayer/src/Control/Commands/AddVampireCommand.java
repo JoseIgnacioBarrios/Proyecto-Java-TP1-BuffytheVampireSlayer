@@ -9,7 +9,7 @@ public class AddVampireCommand extends Command{
 	private String arg2;
 	private String arg3;
 	public AddVampireCommand() {
-		super("V", "v", "[v]ampire","[<type>]<x><y>. Type = {\"\"|\"D\"|\"E\"}: add a vampire in position x, y");
+		super("V", "v", "[v]ampire","[<type>] <x> <y>. Type = {\"\"|\"D\"|\"E\"}: add a vampire in position x, y");
 		// TODO Auto-generated constructor stub
 	}
 
@@ -18,12 +18,15 @@ public class AddVampireCommand extends Command{
 		boolean ok=false;
 		if(this.type.equalsIgnoreCase("v")) {
 			 game.addVampire(x, y);
+			 ok=true;
 		}
 		else if(this.type.equalsIgnoreCase("D")) {
 			game.addDracula(x, y);
+			ok=true;
 		}
 		else if(this.type.equalsIgnoreCase("E")) {
 			game.addExplosiveVampire(x, y);
+			ok=true;
 		}
 		else System.out.println("[ERROR]: Invalid type");
 		switch (game.getErrorAddVampire()) {		

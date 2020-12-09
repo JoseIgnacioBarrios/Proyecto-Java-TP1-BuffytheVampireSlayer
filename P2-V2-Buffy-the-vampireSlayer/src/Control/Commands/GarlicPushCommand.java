@@ -5,7 +5,7 @@ import Logic.Game;
 public class GarlicPushCommand extends Command{
 
 	public GarlicPushCommand() {
-		super("g", "garlic", "[g]arlic", "pushes back vampires");
+		super("g", "garlic", "[g]arlic ", "pushes back vampires");
 		// TODO Auto-generated constructor stub
 	}
 
