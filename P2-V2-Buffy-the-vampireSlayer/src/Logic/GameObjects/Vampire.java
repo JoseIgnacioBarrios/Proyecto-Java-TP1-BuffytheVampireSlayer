@@ -105,7 +105,7 @@ public class Vampire extends GameObject{
 		else this.muevete=true;
 	}
 	public boolean receiveGarlicPush() {
-		if(this.g.celdaVacia(this.x+1, this.y)) {
+		//if(this.g.celdaVacia(this.x+1, this.y)) {
 			if(this.x+1>=this.g.getDimX()) {
 				this.vida=0;
 			}
@@ -113,7 +113,7 @@ public class Vampire extends GameObject{
 				this.x++;
 				this.muevete=true;
 			}
-		}
+		//}
 		return true;
 	}
 	public boolean receiveLightFlash() {
