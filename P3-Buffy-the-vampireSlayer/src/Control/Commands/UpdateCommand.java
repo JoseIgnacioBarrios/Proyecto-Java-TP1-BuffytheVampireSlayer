@@ -2,6 +2,9 @@ package Control.Commands;
 
 import Exception.CommandExecuteException;
 import Exception.CommandParseException;
+import Exception.DraculalsAliveException;
+import Exception.NoMoreVampiresException;
+import Exception.UnvalidPsotionException;
 import Logic.Game;
 
 public class UpdateCommand extends Command{
@@ -10,7 +13,7 @@ public class UpdateCommand extends Command{
 	}
 
 	@Override
-	public boolean execute(Game game)throws CommandExecuteException {
+	public boolean execute(Game game) throws CommandExecuteException {
 		// TODO Auto-generated method stub
 		game.update();
 		return true;
@@ -19,12 +22,13 @@ public class UpdateCommand extends Command{
 	@Override
 	public Command parse(String[] commandWords)throws CommandParseException {
 		// TODO Auto-generated method stub
-		if(commandWords.length==1) {
-			if(matchCommandName(commandWords[0])) {
-				return this;
-			}
+		try {
+				return parseNoParamsCommand(commandWords);
 		}
-		return null;
+		catch (CommandParseException e) {
+			// TODO: handle exception
+			throw new CommandParseException("[ERROR]: Command "+this.name+" :"+incorrectNumberOfArgsMsg);
+		}
 	}
 	
 

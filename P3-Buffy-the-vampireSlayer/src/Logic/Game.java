@@ -2,6 +2,7 @@ package Logic;
 import java.util.Random;
 
 import Exception.CommandExecuteException;
+import Exception.DraculalsAliveException;
 import Exception.NoMoreVampiresException;
 import Exception.NotEnoughCoinsException;
 import Exception.UnvalidPsotionException;
@@ -56,7 +57,7 @@ public class Game implements IPrintable {
 		}
 		return ok;
 	}
-	public void add(int x,int y) throws NotEnoughCoinsException, UnvalidPsotionException, NoMoreVampiresException{
+	public void add(int x,int y) throws NotEnoughCoinsException, UnvalidPsotionException, NoMoreVampiresException, DraculalsAliveException{
 		if (this.player.getCoins()>=this.player.getPrecio()){
 			if(this.gameObjectboard.limiteBlood(x, y)) {
 				this.gameObjectboard.add(new Slayer(x,y,this));
@@ -89,7 +90,7 @@ public class Game implements IPrintable {
 			throw new UnvalidPsotionException("[ERROR] : "+"("+x+","+y+"): "+"Unvalid position");
 			}
 	}
-	public void addDracula(int x, int y) {
+	public void addDracula(int x, int y)throws DraculalsAliveException,UnvalidPsotionException {
 		if(celdaVacia(x, y)) {
 			if (this.gameObjectboard.limitedracula(x, y)) {
 				if(!Dracula.getVivodracula()) {
@@ -101,25 +102,29 @@ public class Game implements IPrintable {
 					else this.errorAddVampire=0;
 					
 				}
-				else this.errorAddVampire=2; 
+				else throw new DraculalsAliveException("[ERROR] : Dracula is already alive"); 
 			}
-			else this.errorAddVampire=0;
+			else throw new UnvalidPsotionException("[ERROR] : "+"("+x+","+y+"): "+"Unvalid position");
 		}
-		else this.errorAddVampire=0;
+		else throw new UnvalidPsotionException("[ERROR] : "+"("+x+","+y+"): "+"Unvalid position");
 	}
-	public void addExplosiveVampire(int x, int y) {
-		if(celdaVacia(x, y)) {
-			if(this.gameObjectboard.limitedracula(x, y)) {
-				this.gameObjectboard.add(new ExplosiveVampire(x,y,this));
-				//Dracula.setVivodraculaCambio();
-				this.errorAddVampire=4;
+	public void addExplosiveVampire(int x, int y)throws UnvalidPsotionException,NoMoreVampiresException {
+		if(this.gameObjectboard.podravampire()) {	
+			if(celdaVacia(x, y)) {
+				if(this.gameObjectboard.limitedracula(x, y)) {
+					this.gameObjectboard.add(new ExplosiveVampire(x,y,this));
+					//Dracula.setVivodraculaCambio();
+					this.errorAddVampire=4;
+				}
+				else throw new UnvalidPsotionException("[ERROR] : "+"("+x+","+y+"): "+"Unvalid position");
 			}
-			else this.errorAddVampire=0;
+			else throw new UnvalidPsotionException("[ERROR] : "+"("+x+","+y+"): "+"Unvalid position");
 		}
-		else this.errorAddVampire=0;
+		else  throw new NoMoreVampiresException("[ERROR] : Limite de Vampire");
+		
 		
 	}
-	public boolean addBloodBank(int x, int y, int z)throws UnvalidPsotionException, NotEnoughCoinsException, NoMoreVampiresException {
+	public boolean addBloodBank(int x, int y, int z)throws UnvalidPsotionException, NotEnoughCoinsException, NoMoreVampiresException, DraculalsAliveException {
 		boolean ok=false;
 		if(celdaVacia(x, y)) {
 			if(this.player.getCoins()>=z) {
@@ -162,7 +167,7 @@ public class Game implements IPrintable {
 		this.player.reset();
 	}
 
-	public void update() throws UnvalidPsotionException, NoMoreVampiresException   {
+	public void update() throws UnvalidPsotionException, NoMoreVampiresException, DraculalsAliveException   {
 		generaCoins();
 		this.gameObjectboard.move();
 		this.gameObjectboard.attack();
@@ -274,20 +279,25 @@ public class Game implements IPrintable {
 		return this.gameObjectboard.celdaVacia(x, y);
 	}
 
-	public void garlicPush() throws UnvalidPsotionException, NoMoreVampiresException {
+	public void garlicPush() throws NotEnoughCoinsException, UnvalidPsotionException, NoMoreVampiresException, DraculalsAliveException{
 		if(this.player.getCoins()>=10) {
 			this.gameObjectboard.garlicPush();
 			this.player.usargarlicpush();
 			update();
 			
 		}
+		
+		else throw new NotEnoughCoinsException("[ERROR]: Defender cost : Not enough coins");
 	}
 
-	public void lightFlash() throws UnvalidPsotionException, NoMoreVampiresException {
+	public void lightFlash() throws UnvalidPsotionException, NoMoreVampiresException, DraculalsAliveException ,NotEnoughCoinsException{
+		
 		if(this.player.getCoins()>=this.player.getPrecio()) {
 			this.gameObjectboard.lightFlash();
 			update();
-		}		
+		}
+		else throw new NotEnoughCoinsException("[ERROR]: Defender cost : Not enough coins");
+		
 	}
 
 	public void superCoins() {

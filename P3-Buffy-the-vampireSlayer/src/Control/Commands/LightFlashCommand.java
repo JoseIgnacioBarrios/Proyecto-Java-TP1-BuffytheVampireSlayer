@@ -2,7 +2,7 @@ package Control.Commands;
 
 import Exception.CommandExecuteException;
 import Exception.CommandParseException;
-import Exception.UnvalidPsotionException;
+import Exception.NotEnoughCoinsException;
 import Logic.Game;
 
 public class LightFlashCommand extends Command{
@@ -15,18 +15,26 @@ public class LightFlashCommand extends Command{
 	@Override
 	public boolean execute(Game game) throws CommandExecuteException {
 		// TODO Auto-generated method stub
+		try {
 		game.lightFlash();
 		return true;
+		}
+		catch (NotEnoughCoinsException e) {
+			// TODO: handle exception
+			System.out.println(e.getMessage());
+			throw new CommandExecuteException("[ERROR]: Failed to Light");
+		}
 	}
 
 	@Override
 	public Command parse(String[] commandWords)throws CommandParseException {
-		if(commandWords.length==1) {
-			if(matchCommandName(commandWords[0])) {
-				return this;
-			}
+		try {
+				return parseNoParamsCommand(commandWords);
 		}
-		return null;
+		catch (CommandParseException e) {
+			// TODO: handle exception
+			throw new CommandParseException("[ERROR]: Command "+this.name+" :"+incorrectNumberOfArgsMsg);
+		}
 	}
 
 }

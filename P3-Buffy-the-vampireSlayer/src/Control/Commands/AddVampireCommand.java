@@ -60,7 +60,7 @@ public class AddVampireCommand extends Command{
 
 	@Override
 	public Command parse(String[] commandWords)throws CommandParseException {
-		
+		try {
 		if(commandWords.length==4) {
 			this.type=commandWords[1];
 			if(matchCommandName(commandWords[0])) {//||this.type.equalsIgnoreCase("D")||this.type.equalsIgnoreCase("E")) {
@@ -88,6 +88,11 @@ public class AddVampireCommand extends Command{
 			}
 		}
 		return null;
+		}
+		catch (CommandParseException e) {
+			// TODO: handle exception
+			throw new CommandParseException("[ERROR]: Command "+this.name+" :"+incorrectNumberOfArgsMsg);
+		}
 	}
 	
 	public boolean validaNUmeros(String arg) {

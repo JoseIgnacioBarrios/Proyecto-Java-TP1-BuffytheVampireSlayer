@@ -33,10 +33,8 @@ public abstract class Command {
 	  protected Command parseNoParamsCommand(String[] words)throws CommandParseException {
 	
 			if (matchCommandName(words[0])) {
-				if (words.length != 1) {
-					System.err.println(incorrectArgsMsg);
-					return null;
-				}
+				if (words.length != 1) throw new CommandParseException("[ERROR : Command ]"+name+" :"+incorrectArgsMsg );
+
 				return this;
 			}
 			

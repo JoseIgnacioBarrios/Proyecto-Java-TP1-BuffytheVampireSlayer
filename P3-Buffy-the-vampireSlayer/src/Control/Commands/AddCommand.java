@@ -35,7 +35,7 @@ public class AddCommand extends Command {
 		}
 		catch (CommandExecuteException e) {
 			System.out.println(e.getMessage());
-			throw new CommandExecuteException("[ERROR]: Unvalid argument for add slayer command, number expected: [a]dd <x> <y>");
+			throw new CommandExecuteException("[ERROR]: Failed to add slayer");
 		}
 		
 			
@@ -81,7 +81,7 @@ public class AddCommand extends Command {
 			return null;
 		}
 		catch (CommandParseException ue) {
-			throw new CommandParseException("[ERROR]: Command "+this.name+" :"+incorrectNumberOfArgsMsg); 
+			throw new CommandParseException("[ERROR]:  Unvalid argument for Add slayer command, number expected: [a]dd <x> <y>"); 
 		}
 	}
 	public boolean validaNUmeros(String arg) {

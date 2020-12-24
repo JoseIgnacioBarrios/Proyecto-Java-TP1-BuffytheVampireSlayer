@@ -14,20 +14,28 @@ public class GarlicPushCommand extends Command{
 
 	@Override
 	public boolean execute(Game game) throws CommandExecuteException {
+		try {
 		game.garlicPush();
 		//game.update();
 		return true;
+		}
+		catch (UnvalidPsotionException e) {
+			// TODO: handle exception
+			System.out.println(e.getMessage());
+			throw new CommandExecuteException("[ERROR]: Failed to Garlic");
+		}
+		
 	}
 
 	@Override
 	public Command parse(String[] commandWords)throws CommandParseException {
-		if(commandWords.length==1) {
-			if(matchCommandName(commandWords[0])) {
-				return this;
-				
-			}
+		try {
+				return parseNoParamsCommand(commandWords);
 		}
-		return null;
+		catch (CommandParseException e) {
+			// TODO: handle exception
+			throw new CommandParseException("[ERROR]: Command "+this.name+" :"+incorrectNumberOfArgsMsg);
+		}
 	}
 
 }

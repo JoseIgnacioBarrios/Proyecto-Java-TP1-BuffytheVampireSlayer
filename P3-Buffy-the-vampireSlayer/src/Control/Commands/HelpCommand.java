@@ -20,12 +20,13 @@ public class HelpCommand extends Command{
 	@Override
 	public Command parse(String[] commandWords)throws CommandParseException {
 		// TODO Auto-generated method stub
-		if(commandWords.length==1 ) {
-			if(matchCommandName(commandWords[0])) {
-				return this;
-			}
+		try {
+				return parseNoParamsCommand(commandWords);
 		}
-		return null;
+		catch (CommandParseException e) {
+			// TODO: handle exception
+			throw new CommandParseException("[ERROR]: Command "+this.name+" :"+incorrectNumberOfArgsMsg);
+		}
 	}
 
 }

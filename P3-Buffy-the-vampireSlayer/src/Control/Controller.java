@@ -45,7 +45,7 @@ public class Controller {
 		    	  System.out.format(ex.getMessage() + "%n%n");
 		      	}
 		      catch(NullPointerException ex) {
-		    	  System.out.println("[ERROR]: "+unknownCommandMsg+" Falta");
+		    	  System.out.println("[ERROR]: "+unknownCommandMsg);
 		      }
 	    }
 	    
