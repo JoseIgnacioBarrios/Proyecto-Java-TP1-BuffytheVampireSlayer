@@ -8,7 +8,7 @@ public class Player {
 	private final int sumacoins= 10;
 	private Random ran;
 	public Player(Random ran) {//No podemos tener referencia a game
-		this.coins = 1;//coinsreset;
+		this.coins = 50;//coinsreset;
 		this.ran=ran;
 	}
 	public void usarCoins() 

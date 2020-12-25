@@ -61,11 +61,13 @@ public class AddCommand extends Command {
 	public Command parse(String[] commandWords)throws CommandParseException {
 		// TODO Auto-generated method stub
 		try {
-			if(commandWords.length==3 ) {
+			//if(commandWords.length==3 ) {
+				Command otros= parseNoParamsCommandtres(commandWords);
+				if(otros!= null) {
 				this.arg1=commandWords[1];
 				this.arg2=commandWords[2];
 				//if(commandWords.length<4) {
-					if(matchCommandName(commandWords[0])&&validaNUmeros(this.arg1)&&validaNUmeros(this.arg2)) {
+					if(validaNUmeros(this.arg1)&&validaNUmeros(this.arg2)) {
 	//					if((Integer.parseInt(commandWords[1])>= 0) && (Integer.parseInt(commandWords[2])>=0) 
 	//	//	    			(Integer.parseInt(commandWords[1])< game.getDimx()-1) && 
 	//	//	    			(Integer.parseInt(commandWords[2])<=game.getDimy()-1)
@@ -73,16 +75,23 @@ public class AddCommand extends Command {
 							this.x=Integer.parseInt(commandWords[1]);
 							this.y=Integer.parseInt(commandWords[2]);
 							//this.arg=commandWords[0];
-							return this;
+							return parseNoParamsCommandtres(commandWords);
 						//}
 					}
-				//}
-			}
-			return null;
+					else throw new NumberFormatException("[ERROR]: Unvalid argument for Add slayer command, number expected: [a]dd <x> <y>");
+				}return otros;
+			//}
+			
 		}
-		catch (CommandParseException ue) {
-			throw new CommandParseException("[ERROR]:  Unvalid argument for Add slayer command, number expected: [a]dd <x> <y>"); 
+		catch (CommandParseException e) {
+			//throw new CommandParseException("[ERROR]:  Unvalid argument for Add slayer command, number expected: [a]dd <x> <y>"); 
+			System.out.println(e.getMessage());
 		}
+		catch (NumberFormatException e) {
+			// TODO: handle exception
+			System.out.println(e.getMessage());
+		}
+		return null;
 	}
 	public boolean validaNUmeros(String arg) {
 		return arg.matches("[0-9]");

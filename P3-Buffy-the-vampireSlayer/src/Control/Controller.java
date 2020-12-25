@@ -39,7 +39,9 @@ public class Controller {
 		      
 		      try {
 		    	  Command command = CommandGenerator.parseCommand(parameters);
+		    	  if(command!=null) {
 		    	  refreshDisplay=command.execute(game);
+		    	  }
 		    	  }
 		      catch(GameException ex) {
 		    	  System.out.format(ex.getMessage() + "%n%n");

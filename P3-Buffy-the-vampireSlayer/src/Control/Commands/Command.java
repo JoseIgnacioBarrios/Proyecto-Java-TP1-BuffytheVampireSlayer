@@ -40,11 +40,31 @@ public abstract class Command {
 			
 			return null;
 	  }
+	  protected Command parseNoParamsCommandtres(String[] words)throws CommandParseException {
+			
+			if (matchCommandName(words[0])) {
+				if (words.length != 3) throw new CommandParseException("[ERROR : Command ]"+name+" :"+incorrectArgsMsg );
+
+				return this;
+			}
+			
+			return null;
+	  }
+	  protected Command parseNoParamsCommandcuatro(String[] words)throws CommandParseException {
+			
+			if (matchCommandName(words[0])) {
+				if (words.length != 4) throw new CommandParseException("[ERROR : Command ]"+name+" :"+incorrectArgsMsg );
+
+				return this;
+			}
+			
+			return null;
+	  }
 	  
 	  public String helpText(){
 	    return  details + ": " + help + "\n";
 	  }
 	  public String messagepos(int x, int y) {
 			 return "position (" + x + ", " + y + ") ";
-		 }
+	  }
 }

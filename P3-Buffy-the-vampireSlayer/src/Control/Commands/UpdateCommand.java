@@ -27,8 +27,10 @@ public class UpdateCommand extends Command{
 		}
 		catch (CommandParseException e) {
 			// TODO: handle exception
-			throw new CommandParseException("[ERROR]: Command "+this.name+" :"+incorrectNumberOfArgsMsg);
+			//throw new CommandParseException("[ERROR]: Command "+this.name+" :"+incorrectNumberOfArgsMsg);
+			System.out.println(e.getMessage());
 		}
+		return null;
 	}
 	
 

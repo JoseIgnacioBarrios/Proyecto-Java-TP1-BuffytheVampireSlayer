@@ -167,13 +167,13 @@ public class Game implements IPrintable {
 		this.player.reset();
 	}
 
-	public void update() throws UnvalidPsotionException, NoMoreVampiresException, DraculalsAliveException   {
+	public void update() {//throws UnvalidPsotionException, NoMoreVampiresException, DraculalsAliveException   {
 		generaCoins();
 		this.gameObjectboard.move();
 		this.gameObjectboard.attack();
-		this.gameObjectboard.addVampire();
-		this.gameObjectboard.addDracula();
-		this.gameObjectboard.addExpVamvire();
+		this.gameObjectboard.addVampire2();
+		this.gameObjectboard.addDracula2();
+		this.gameObjectboard.addExpVamvire2();
 		this.gameObjectboard.remove();
 		if(!isFinished()){this.ciclo++;}
 	}
@@ -310,6 +310,49 @@ public class Game implements IPrintable {
 			return cad="Dracula is alive";
 		}
 		return cad;
+	}
+	//////////////////////////////////////////
+	public void addVampire2(int x,int y) {
+		if(celdaVacia(x, y)) {
+			if(this.gameObjectboard.limitedracula(x, y)) {
+				if(this.gameObjectboard.podravampire()) {
+					this.gameObjectboard.add(new Vampire(x,y,this));
+					//this.errorAddVampire=4;
+					//this.cont++;
+				}
+			}
+			//else this.errorAddVampire=0;
+		}
+	}
+	public void addDracula2(int x, int y) {
+		if(celdaVacia(x, y)) {
+			if (this.gameObjectboard.limitedracula(x, y)) {
+				if(!Dracula.getVivodracula()) {
+					if(this.gameObjectboard.podravampire()) {
+						this.gameObjectboard.add(new Dracula(x,y,this));
+						Dracula.setVivodraculaCambio();
+						//this.errorAddVampire=4;
+					}
+					//else this.errorAddVampire=0;
+					
+				}
+				//else this.errorAddVampire=2; 
+			}
+			//else this.errorAddVampire=0;
+		}
+		//else this.errorAddVampire=0;
+	}
+	public void addExplosiveVampire2(int x, int y) {
+		if(celdaVacia(x, y)) {
+			if(this.gameObjectboard.limitedracula(x, y)) {
+				this.gameObjectboard.add(new ExplosiveVampire(x,y,this));
+				//Dracula.setVivodraculaCambio();
+				this.errorAddVampire=4;
+			}
+			//else this.errorAddVampire=0;
+		}
+		//else this.errorAddVampire=0;
+		
 	}
 
 	

@@ -60,10 +60,11 @@ public class AddVampireCommand extends Command{
 
 	@Override
 	public Command parse(String[] commandWords)throws CommandParseException {
+		
 		try {
-		if(commandWords.length==4) {
-			this.type=commandWords[1];
-			if(matchCommandName(commandWords[0])) {//||this.type.equalsIgnoreCase("D")||this.type.equalsIgnoreCase("E")) {
+		if(matchCommandName(commandWords[0])) {
+			if(commandWords.length==4) {//||this.type.equalsIgnoreCase("D")||this.type.equalsIgnoreCase("E")) {
+				this.type=commandWords[1];
 				if(commandWords[1].equalsIgnoreCase("D")||commandWords[1].equalsIgnoreCase("E")||commandWords[1].equalsIgnoreCase("")) {
 					this.arg2=commandWords[2];
 					this.arg3=commandWords[3];
@@ -73,10 +74,11 @@ public class AddVampireCommand extends Command{
 					this.y=Integer.parseInt(commandWords[3]);
 					return this;
 				}
+				else throw new CommandParseException("[Error]: [<type>] <x> <y>. Type = {\" \"|\"D\"|\"E\"}: add a vampire in position x, y");
 			}
 		}
-		else if (commandWords.length==3) {
-			if(matchCommandName(commandWords[0])){
+		else if (matchCommandName(commandWords[0])) {
+			if(commandWords.length==3){
 				this.arg2=commandWords[1];
 				this.arg3=commandWords[2];
 				if(validaNUmeros(this.arg2)&&validaNUmeros(this.arg3)) {
@@ -86,13 +88,15 @@ public class AddVampireCommand extends Command{
 					return this;
 				}
 			}
+			else throw new CommandParseException("[Error]: [<type>] <x> <y>. Type = {\" \"|\"D\"|\"E\"}: add a vampire in position x, y");
 		}
-		return null;
+		//else throw new CommandParseException("[Error]: [<type>] <x> <y>. Type = {\"\"|\"D\"|\"E\"}: add a vampire in position x, y");
 		}
 		catch (CommandParseException e) {
-			// TODO: handle exception
-			throw new CommandParseException("[ERROR]: Command "+this.name+" :"+incorrectNumberOfArgsMsg);
+			System.out.println(e.getMessage());
+			//throw new CommandParseException("[Error]: [<type>] <x> <y>. Type = {\\\"\\\"|\\\"D\\\"|\\\"E\\\"}: add a vampire in position x, y");
 		}
+		return null;
 	}
 	
 	public boolean validaNUmeros(String arg) {

@@ -18,9 +18,14 @@ public class CommandGenerator {
 	};
 	public static Command parseCommand(String[ ] commandWords) throws CommandParseException {
 		
-		for (int i = 0; i < availableCommands.length; i++) {
-			if(availableCommands[i].parse(commandWords)!= null) {
-				return availableCommands[i];
+//		for (int i = 0; i < availableCommands.length; i++) {
+//			if(availableCommands[i].parse(commandWords)!= null) {
+//				return availableCommands[i];
+//			}
+//		}
+		for (Command e : availableCommands) {
+			if(e.parse(commandWords)!= null) {
+				return e;
 			}
 		}
 		return null;

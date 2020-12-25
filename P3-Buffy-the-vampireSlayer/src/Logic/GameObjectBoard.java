@@ -29,20 +29,20 @@ public class GameObjectBoard {
 			this.objectLista.add(Objeto);
 		
 	}
-	public void addVampire() throws UnvalidPsotionException, NoMoreVampiresException {
+	public void addVampire2() {//throws UnvalidPsotionException, NoMoreVampiresException {
 		if(generatevampire() == true && podravampire()) {//Vampire.getVampiretablero()<this.game.getnumVampire()){//this.game.getcontVampire() < this.game.getnumVampire()) {
-			this.game.addVampire(this.game.getDimX()-1 , this.game.getRand().nextInt(this.game.getDimY()) );
+			this.game.addVampire2(this.game.getDimX()-1 , this.game.getRand().nextInt(this.game.getDimY()) );
 		}
 		
 	}
-	public void addDracula() throws DraculalsAliveException, UnvalidPsotionException {
+	public void addDracula2() {//throws DraculalsAliveException, UnvalidPsotionException {
 		if(generatevampire() == true && podravampire()) {//Vampire.getVampiretablero() < this.game.getnumVampire()) {
-			this.game.addDracula(this.game.getDimX()-1 , this.game.getRand().nextInt(this.game.getDimY()) );
+			this.game.addDracula2(this.game.getDimX()-1 , this.game.getRand().nextInt(this.game.getDimY()) );
 		}
 	}
-	public void addExpVamvire() throws UnvalidPsotionException, NoMoreVampiresException {
+	public void addExpVamvire2() {//throws UnvalidPsotionException, NoMoreVampiresException {
 		if(generatevampire() == true && podravampire()) {//Vampire.getVampiretablero() < this.game.getnumVampire()) {
-			this.game.addExplosiveVampire(this.game.getDimX()-1 , this.game.getRand().nextInt(this.game.getDimY()) );
+			this.game.addExplosiveVampire2(this.game.getDimX()-1 , this.game.getRand().nextInt(this.game.getDimY()) );
 		}
 		
 	}
