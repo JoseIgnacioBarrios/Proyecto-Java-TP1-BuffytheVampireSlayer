@@ -47,6 +47,12 @@ public class BloodBank extends GameObject{
 		return 0;
 	}
 
+	@Override
+	public String serialize() {
+		String cadena = "B;"+this.x+";"+this.y+";"+this.vida+";"+this.z;
+		return cadena;
+	}
+
 	
 
 }

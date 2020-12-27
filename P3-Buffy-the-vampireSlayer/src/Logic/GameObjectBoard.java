@@ -126,6 +126,11 @@ public class GameObjectBoard {
 	public void lightFlash() {
 		this.objectLista.lightFlash();		
 	}
+	public String serialize() {
+		return this.objectLista.serialize();
+		// TODO Auto-generated method stub
+		
+	}
 	
 	
 	

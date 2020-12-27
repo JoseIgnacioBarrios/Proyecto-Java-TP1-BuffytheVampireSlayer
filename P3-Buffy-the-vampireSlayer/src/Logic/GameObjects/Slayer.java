@@ -59,6 +59,12 @@ public class Slayer extends GameObject{
 		return 0;
 	}
 
+	@Override
+	public String serialize() {
+		String cadena = "S;"+this.x+";"+this.y+";"+this.vida;
+		return cadena;
+	}
+
 
 	
 	

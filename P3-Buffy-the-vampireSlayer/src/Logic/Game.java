@@ -2,6 +2,7 @@ package Logic;
 import java.util.Random;
 
 import Exception.CommandExecuteException;
+import Exception.CommandParseException;
 import Exception.DraculalsAliveException;
 import Exception.NoMoreVampiresException;
 import Exception.NotEnoughCoinsException;
@@ -135,14 +136,14 @@ public class Game implements IPrintable {
 				this.errorAddVampire=4;
 				ok= true;
 				}
-				else {throw new UnvalidPsotionException("[ERROR] : "+"("+x+","+y+": "+"Unvalid position");}
+				else {throw new UnvalidPsotionException("[ERROR]: position "+"("+x+","+y+"): "+"Unvalid position");}
 			}
 			else { //this.errorAddVampire=1;
-				throw new NotEnoughCoinsException ("[ERROR]: Defender cost : Not enough coins"  );
+				throw new NotEnoughCoinsException ("[ERROR]: Defender cost : Not enough coins");
 			}
 		}
 		else {//this.errorAddVampire=0;
-			throw new UnvalidPsotionException("[ERROR] : "+"("+x+","+y+"): "+"Unvalid position");
+			throw new UnvalidPsotionException("[ERROR]: position "+"("+x+","+y+"): "+"Unvalid position");
 			
 			}
 		return ok;
@@ -347,12 +348,27 @@ public class Game implements IPrintable {
 			if(this.gameObjectboard.limitedracula(x, y)) {
 				this.gameObjectboard.add(new ExplosiveVampire(x,y,this));
 				//Dracula.setVivodraculaCambio();
-				this.errorAddVampire=4;
+				//this.errorAddVampire=4;
 			}
 			//else this.errorAddVampire=0;
 		}
 		//else this.errorAddVampire=0;
 		
+	}
+
+	public String serialize()throws CommandExecuteException {
+		// TODO Auto-generated method stub
+		String cad;
+		cad= "Cicles: "+this.ciclo+"\n"+
+			"Coins: "+this.player.getCoins()+"\n"+
+			"Level: "+this.level.getName()+"\n"+
+			"Remaining Vampires: "+(this.level.getNumberOfVampires()-Vampire.getVampiretablero())+"\n"+
+			"Vampires on the board: "+ tablero()+"\n"+
+			"\n"+
+			"Game Object List: "+"\n"+
+			this.gameObjectboard.serialize();
+		
+		return cad;
 	}
 
 	

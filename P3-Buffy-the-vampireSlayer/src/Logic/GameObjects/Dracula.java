@@ -47,6 +47,10 @@ public class Dracula extends Vampire{
 	public boolean receiveLightFlash() {
 		return false;
 	}
+	public String serialize() {
+		String	 cadena = "D;"+this.x+";"+this.y+";"+this.vida+";"+getmovint();
+		return cadena;
+	}
 
 
 }

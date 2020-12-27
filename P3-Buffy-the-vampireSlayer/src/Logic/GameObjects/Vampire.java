@@ -138,6 +138,15 @@ public class Vampire extends GameObject{
 		this.vida=0;
 		return true;
 	}
+
+	@Override
+	public String serialize() {
+		String	 cadena = "V;"+this.x+";"+this.y+";"+this.vida+";"+this.movint;
+		return cadena;
+	}
+	public int getmovint() {
+		return this.movint;
+	}
 	
 
 

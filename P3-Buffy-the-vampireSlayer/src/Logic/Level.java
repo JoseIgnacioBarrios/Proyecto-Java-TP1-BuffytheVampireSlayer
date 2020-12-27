@@ -30,6 +30,9 @@ public enum Level {
 	public int getDimY() {
 		return dim_y;
 	}
+	public String getName() {
+		return name;
+	}
 	
 	public static Level parse(String inputString) {
         for (Level level : Level.values())

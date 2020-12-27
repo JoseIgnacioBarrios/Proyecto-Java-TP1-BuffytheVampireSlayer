@@ -161,6 +161,17 @@ public class GameObjectList {
 		}
 		
 	}
+
+
+	public String serialize() {
+		if(gameobjects!=null) {
+			for (GameObject e : gameobjects) {
+					return e.serialize();
+			}
+		
+		}
+		return " ";
+	}
 	
 	
 	

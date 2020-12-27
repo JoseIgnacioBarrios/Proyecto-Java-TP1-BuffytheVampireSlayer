@@ -41,6 +41,7 @@ public abstract class GameObject implements IAttack{
 		}
 		else return false;
 	}
+	public abstract String serialize();
 	
 	
 	

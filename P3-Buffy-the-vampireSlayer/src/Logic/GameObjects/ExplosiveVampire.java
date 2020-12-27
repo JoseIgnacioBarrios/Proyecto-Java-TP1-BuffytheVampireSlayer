@@ -33,6 +33,11 @@ public class ExplosiveVampire extends Vampire{
 		}
 		return true;
 	}
+	public String serialize() {
+		String	 cadena = "EV;"+this.x+";"+this.y+";"+this.vida+";"+getmovint();
+		return cadena;
+	}
+
 
 
 }
