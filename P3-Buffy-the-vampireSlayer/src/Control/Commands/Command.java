@@ -1,5 +1,7 @@
 package Control.Commands;
 
+import java.io.IOException;
+
 import Exception.CommandExecuteException;
 import Exception.CommandParseException;
 import Logic.Game;
@@ -60,11 +62,25 @@ public abstract class Command {
 			
 			return null;
 	  }
+	  protected Command parseNoParamsCommanddos(String[] words)throws CommandParseException {
+			
+			if (matchCommandName(words[0])) {
+				if (words.length != 2) throw new CommandParseException("[ERROR : Command ]"+name+" :"+incorrectArgsMsg );
+
+				return this;
+			}
+			
+			return null;
+	  }
 	  
 	  public String helpText(){
 	    return  details + ": " + help + "\n";
 	  }
 	  public String messagepos(int x, int y) {
 			 return "position (" + x + ", " + y + ") ";
+	  }
+	  
+	  protected boolean validaLetra(String cad) {
+		return cad.matches("[a-zA-Z]*");
 	  }
 }

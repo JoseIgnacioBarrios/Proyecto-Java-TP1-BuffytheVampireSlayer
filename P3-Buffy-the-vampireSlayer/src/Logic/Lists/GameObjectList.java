@@ -164,13 +164,18 @@ public class GameObjectList {
 
 
 	public String serialize() {
+		String acu="";
+		String cad="";
 		if(gameobjects!=null) {
 			for (GameObject e : gameobjects) {
-					return e.serialize();
+					  cad=(e.serialize());
+					  acu=acu+"\n"+cad;
 			}
+			
 		
 		}
-		return " ";
+		return acu+"\n";
+		
 	}
 	
 	

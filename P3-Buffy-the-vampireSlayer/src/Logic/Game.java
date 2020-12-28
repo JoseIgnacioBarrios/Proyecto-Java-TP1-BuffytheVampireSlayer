@@ -359,13 +359,13 @@ public class Game implements IPrintable {
 	public String serialize()throws CommandExecuteException {
 		// TODO Auto-generated method stub
 		String cad;
-		cad= "Cicles: "+this.ciclo+"\n"+
+		cad= "\n"+"Cicles: "+this.ciclo+"\n"+
 			"Coins: "+this.player.getCoins()+"\n"+
 			"Level: "+this.level.getName()+"\n"+
 			"Remaining Vampires: "+(this.level.getNumberOfVampires()-Vampire.getVampiretablero())+"\n"+
 			"Vampires on the board: "+ tablero()+"\n"+
 			"\n"+
-			"Game Object List: "+"\n"+
+			"Game Object List: "+
 			this.gameObjectboard.serialize();
 		
 		return cad;
