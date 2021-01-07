@@ -72,14 +72,16 @@ public class AddCommand extends Command {
 	//	//	    			(Integer.parseInt(commandWords[1])< game.getDimx()-1) && 
 	//	//	    			(Integer.parseInt(commandWords[2])<=game.getDimy()-1)
 	//		    			) {
+							
 							this.x=Integer.parseInt(commandWords[1]);
 							this.y=Integer.parseInt(commandWords[2]);
 							//this.arg=commandWords[0];
 							return parseNoParamsCommandtres(commandWords);
+							
 						//}
 					}
 					else throw new NumberFormatException("[ERROR]: Unvalid argument for Add slayer command, number expected: [a]dd <x> <y>");
-				}return otros;
+				}else return null;
 			//}
 			
 		}
@@ -90,7 +92,9 @@ public class AddCommand extends Command {
 		catch (NumberFormatException e) {
 			// TODO: handle exception
 			System.out.println(e.getMessage());
+			//throw new NumberFormatException("[ERROR]: Unvalid argument for Add slayer command, number expected: [a]dd <x> <y>");
 		}
+		
 		return null;
 	}
 	public boolean validaNUmeros(String arg) {

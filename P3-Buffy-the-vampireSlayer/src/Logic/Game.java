@@ -58,7 +58,7 @@ public class Game implements IPrintable {
 		}
 		return ok;
 	}
-	public void add(int x,int y) throws NotEnoughCoinsException, UnvalidPsotionException, NoMoreVampiresException, DraculalsAliveException{
+	public void add(int x,int y) throws NotEnoughCoinsException, UnvalidPsotionException{//, NoMoreVampiresException, DraculalsAliveException{
 		if (this.player.getCoins()>=this.player.getPrecio()){
 			if(this.gameObjectboard.limiteBlood(x, y)) {
 				this.gameObjectboard.add(new Slayer(x,y,this));

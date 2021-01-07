@@ -39,15 +39,16 @@ public class Controller {
 		      
 		      try {
 		    	  Command command = CommandGenerator.parseCommand(parameters);
-		    	  if(command!=null) {
+		    	  //if(command!=null) {
 		    	  refreshDisplay=command.execute(game);
-		    	  }
+		    	  //}//else throw new NullPointerException();
 		    	  }
 		      catch(GameException ex) {
 		    	  System.out.format(ex.getMessage() + "%n%n");
 		      	}
 		      catch(NullPointerException ex) {
 		    	  System.out.println("[ERROR]: "+unknownCommandMsg);
+		    	  //throw new NullPointerException("[ERROR]: "+unknownCommandMsg);
 		      }
 	    }
 	    
