@@ -25,12 +25,16 @@ public class CommandGenerator {
 //				return availableCommands[i];
 //			}
 //		}
+		Command otro=null;
 		for (Command e : availableCommands) {
 			if(e.parse(commandWords)!= null) {
+				otro=e;
 				return e;
 			}
 		}
-		return null;
+		if(otro==null) {throw new CommandParseException("[ERROR]: Unknown Command \n");}
+		return otro;
+		
 	}
 	public static String commandHelp() {
 		String cad="Available commands:"+"\n";

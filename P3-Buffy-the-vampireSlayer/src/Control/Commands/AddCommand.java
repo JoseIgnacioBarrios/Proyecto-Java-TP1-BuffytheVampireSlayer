@@ -2,6 +2,7 @@ package Control.Commands;
 
 import Exception.CommandExecuteException;
 import Exception.CommandParseException;
+import Exception.NotEnoughCoinsException;
 import Exception.UnvalidPsotionException;
 import Logic.Game;
 
@@ -33,11 +34,14 @@ public class AddCommand extends Command {
 		
 		return ok;
 		}
-		catch (CommandExecuteException e) {
+		catch (UnvalidPsotionException e) {
 			System.out.println(e.getMessage());
 			throw new CommandExecuteException("[ERROR]: Failed to add slayer");
 		}
-		
+		catch (NotEnoughCoinsException e) {
+			System.out.println(e.getMessage());
+			throw new CommandExecuteException("[ERROR]: Failed to add slayer");
+		}
 			
 		
 		
@@ -62,8 +66,9 @@ public class AddCommand extends Command {
 		// TODO Auto-generated method stub
 		try {
 			//if(commandWords.length==3 ) {
-				Command otros= parseNoParamsCommandtres(commandWords);
-				if(otros!= null) {
+				//Command otros= parseNoParamsCommandtres(commandWords);
+				if(matchCommandName(commandWords[0])) {
+					if(commandWords.length==3 ) {
 				this.arg1=commandWords[1];
 				this.arg2=commandWords[2];
 				//if(commandWords.length<4) {
@@ -81,13 +86,14 @@ public class AddCommand extends Command {
 						//}
 					}
 					else throw new NumberFormatException("[ERROR]: Unvalid argument for Add slayer command, number expected: [a]dd <x> <y>");
+					}else throw new CommandParseException("[ERROR]: Command "+this.name+" :"+incorrectNumberOfArgsMsg);
 				}else return null;
 			//}
 			
-		}
-		catch (CommandParseException e) {
+		//}
+		//catch (CommandParseException e) {
 			//throw new CommandParseException("[ERROR]:  Unvalid argument for Add slayer command, number expected: [a]dd <x> <y>"); 
-			System.out.println(e.getMessage());
+			//System.out.println(e.getMessage());
 		}
 		catch (NumberFormatException e) {
 			// TODO: handle exception

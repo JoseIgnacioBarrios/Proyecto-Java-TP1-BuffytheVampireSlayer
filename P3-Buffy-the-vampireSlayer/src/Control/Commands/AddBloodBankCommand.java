@@ -40,7 +40,7 @@ public class AddBloodBankCommand extends Command{
 
 	@Override
 	public Command parse(String[] commandWords)throws CommandParseException {
-		try {
+		//try {
 			if(matchCommandName(commandWords[0])) {
 			if(commandWords.length==4) {
 			//Command otros= parseNoParamsCommandcuatro(commandWords);
@@ -55,19 +55,19 @@ public class AddBloodBankCommand extends Command{
 					return this;
 					
 				}
-				else throw new NumberFormatException();
-			}else throw new CommandParseException();
+				else throw new NumberFormatException("[ERROR]: Introdusca digito X,Y,Z son Numeros");
+			}else throw new CommandParseException("[ERROR]: Command "+this.name+" :"+incorrectNumberOfArgsMsg);
 			}
-		}
-		catch (CommandParseException e) {
-			throw new CommandParseException("[ERROR]: Command "+this.name+" :"+incorrectNumberOfArgsMsg); 
+		//}
+		//catch (CommandParseException e) {
+			//throw new CommandParseException("[ERROR]: Command "+this.name+" :"+incorrectNumberOfArgsMsg); 
 			//System.out.println(e.getMessage());
-		}
-		catch (NumberFormatException e) {
+		//}
+		//catch (NumberFormatException e) {
 			// TODO: handle exception
 			//System.out.println(e.getMessage());
-			throw new NumberFormatException("[ERROR]: Introdusca digito X,Y,Z son Numeros");
-		}
+			//throw new NumberFormatException("[ERROR]: Introdusca digito X,Y,Z son Numeros");
+		//}
 		return null;
 	}
 

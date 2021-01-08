@@ -26,14 +26,14 @@ public class SerializeCommand extends Command {
 
 	@Override
 	public Command parse(String[] commandWords) throws CommandParseException {
-		try {
+		//try {
 			return parseNoParamsCommand(commandWords);
 			
-		}
-		catch (CommandParseException e) {
-			System.out.println(e.getMessage());
-		}
-		return null;
+//		}
+//		catch (CommandParseException e) {
+//			System.out.println(e.getMessage());
+//		}
+//		return null;
 	}
 
 }

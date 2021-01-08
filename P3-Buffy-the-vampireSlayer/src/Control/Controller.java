@@ -46,10 +46,10 @@ public class Controller {
 		      catch(GameException ex) {
 		    	  System.out.format(ex.getMessage() + "%n%n");
 		      	}
-		      catch(NullPointerException ex) {
-		    	  System.out.println("[ERROR]: "+unknownCommandMsg);
-		    	  //throw new NullPointerException("[ERROR]: "+unknownCommandMsg);
-		      }
+//		      catch(NullPointerException ex) {
+//		    	  System.out.println("[ERROR]: "+unknownCommandMsg);
+//		    	  //throw new NullPointerException("[ERROR]: "+unknownCommandMsg);
+//		      }
 	    }
 	    
         	if (refreshDisplay) printGame();

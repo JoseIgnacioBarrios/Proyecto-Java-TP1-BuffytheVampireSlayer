@@ -77,7 +77,7 @@ public class AddVampireCommand extends Command{
 				else throw new CommandParseException("[Error]: [<type>] <x> <y>. Type = {\" \"|\"D\"|\"E\"}: add a vampire in position x, y");
 			}
 		}
-		else if (matchCommandName(commandWords[0])) {
+		if (matchCommandName(commandWords[0])) {
 			if(commandWords.length==3){
 				this.arg2=commandWords[1];
 				this.arg3=commandWords[2];
