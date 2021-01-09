@@ -2,7 +2,8 @@ package Control.Commands;
 
 import Exception.CommandExecuteException;
 import Exception.CommandParseException;
-import Exception.UnvalidPsotionException;
+import Exception.NotEnoughCoinsException;
+
 import Logic.Game;
 
 public class GarlicPushCommand extends Command{
@@ -16,10 +17,9 @@ public class GarlicPushCommand extends Command{
 	public boolean execute(Game game) throws CommandExecuteException {
 		try {
 		game.garlicPush();
-		//game.update();
 		return true;
 		}
-		catch (UnvalidPsotionException e) {
+		catch (NotEnoughCoinsException e) {
 			// TODO: handle exception
 			System.out.println(e.getMessage());
 			throw new CommandExecuteException("[ERROR]: Failed to Garlic");
@@ -29,15 +29,8 @@ public class GarlicPushCommand extends Command{
 
 	@Override
 	public Command parse(String[] commandWords)throws CommandParseException {
-		//try {
 				return parseNoParamsCommand(commandWords);
-//		}
-//		catch (CommandParseException e) {
-//			// TODO: handle exception
-//			//throw new CommandParseException("[ERROR]: Command "+this.name+" :"+incorrectNumberOfArgsMsg);
-//			System.out.println(e.getMessage());
-//		}
-//		return null;
+
 	}
 
 }

@@ -42,69 +42,29 @@ public class AddCommand extends Command {
 			System.out.println(e.getMessage());
 			throw new CommandExecuteException("[ERROR]: Failed to add slayer");
 		}
-			
-		
-		
-		
-//		switch (game.getErrorAdd()) {		
-//		case 0:
-//			//System.out.println("[DEBUG] Executing: "+this.arg+" "+x+" "+y+"0");
-//			System.out.println("[ERROR]: Invalid position");
-//			 return ok=false;
-//		case 1:
-//			//System.out.println("[DEBUG] Executing: "+this.arg+" "+x+" "+y+"1");
-//			System.out.println("[ERROR]: Not enough coins");
-//			 return ok=false;
-//		default: return ok;
-//		}
 
-		//return ok;
 	}
 
 	@Override
 	public Command parse(String[] commandWords)throws CommandParseException {
-		// TODO Auto-generated method stub
-		try {
-			//if(commandWords.length==3 ) {
-				//Command otros= parseNoParamsCommandtres(commandWords);
-				if(matchCommandName(commandWords[0])) {
-					if(commandWords.length==3 ) {
-				this.arg1=commandWords[1];
-				this.arg2=commandWords[2];
-				//if(commandWords.length<4) {
-					if(validaNUmeros(this.arg1)&&validaNUmeros(this.arg2)) {
-	//					if((Integer.parseInt(commandWords[1])>= 0) && (Integer.parseInt(commandWords[2])>=0) 
-	//	//	    			(Integer.parseInt(commandWords[1])< game.getDimx()-1) && 
-	//	//	    			(Integer.parseInt(commandWords[2])<=game.getDimy()-1)
-	//		    			) {
-							
-							this.x=Integer.parseInt(commandWords[1]);
-							this.y=Integer.parseInt(commandWords[2]);
-							//this.arg=commandWords[0];
-							return parseNoParamsCommandtres(commandWords);
-							
-						//}
-					}
-					else throw new NumberFormatException("[ERROR]: Unvalid argument for Add slayer command, number expected: [a]dd <x> <y>");
-					}else throw new CommandParseException("[ERROR]: Command "+this.name+" :"+incorrectNumberOfArgsMsg);
-				}else return null;
-			//}
+		Command command = null;
+		if(matchCommandName(commandWords[0])) {
+			if(commandWords.length==3 ) {
+				try {
+				this.x=Integer.parseInt(commandWords[1]);
+				this.y=Integer.parseInt(commandWords[2]);
+				//command = this;
+				} catch(NumberFormatException e) {
+					throw new CommandParseException("[ERROR]: Command "+this.name+" :"+" incorrecto digitos");
+				}
 			
-		//}
-		//catch (CommandParseException e) {
-			//throw new CommandParseException("[ERROR]:  Unvalid argument for Add slayer command, number expected: [a]dd <x> <y>"); 
-			//System.out.println(e.getMessage());
+				return parseNoParamsCommandtres(commandWords);
+				
+			}
 		}
-		catch (NumberFormatException e) {
-			// TODO: handle exception
-			System.out.println(e.getMessage());
-			//throw new NumberFormatException("[ERROR]: Unvalid argument for Add slayer command, number expected: [a]dd <x> <y>");
-		}
-		
-		return null;
-	}
-	public boolean validaNUmeros(String arg) {
-		return arg.matches("[0-9]");
-	}
+			return command;
 
+			
+	
+	}
 }

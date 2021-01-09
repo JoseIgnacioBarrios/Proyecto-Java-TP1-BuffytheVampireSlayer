@@ -35,7 +35,7 @@ public abstract class Command {
 	  protected Command parseNoParamsCommand(String[] words)throws CommandParseException {
 	
 			if (matchCommandName(words[0])) {
-				if (words.length != 1) throw new CommandParseException("[ERROR : Command ]"+name+" :"+incorrectArgsMsg );
+				if (words.length != 1) throw new CommandParseException("[ERROR] : Command "+name+" :"+incorrectArgsMsg );
 
 				return this;
 			}
@@ -45,7 +45,7 @@ public abstract class Command {
 	  protected Command parseNoParamsCommandtres(String[] words)throws CommandParseException {
 			
 			if (matchCommandName(words[0])) {
-				if (words.length != 3) throw new CommandParseException("[ERROR : Command ]"+name+" :"+incorrectArgsMsg );
+				if (words.length != 3) throw new CommandParseException("[ERROR] : Command "+name+" :"+incorrectArgsMsg );
 
 				return this;
 			}
@@ -55,7 +55,7 @@ public abstract class Command {
 	  protected Command parseNoParamsCommandcuatro(String[] words)throws CommandParseException {
 			
 			if (matchCommandName(words[0])) {
-				if (words.length != 4) throw new CommandParseException("[ERROR : Command ]"+name+" :"+incorrectArgsMsg );
+				if (words.length != 4) throw new CommandParseException("[ERROR] : Command "+name+" :"+incorrectArgsMsg );
 
 				return this;
 			}

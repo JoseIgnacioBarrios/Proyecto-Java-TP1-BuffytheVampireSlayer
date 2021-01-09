@@ -39,8 +39,6 @@ public class SaveCommand extends Command {
 
 	@Override
 	public Command parse(String[] commandWords) throws CommandParseException {
-		// TODO Auto-generated method stub
-		//try {
 			Command com= parseNoParamsCommanddos(commandWords);
 			if(com!=null) {
 				if(validaLetra(commandWords[1])) {
@@ -49,11 +47,7 @@ public class SaveCommand extends Command {
 				}
 			}
 			return null;	
-		//}
-		//catch(CommandParseException e) {
-			//System.out.println(e.getMessage());
-		//}
-		//return null;
+
 	
 	}
 

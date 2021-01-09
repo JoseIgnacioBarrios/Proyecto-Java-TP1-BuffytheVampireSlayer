@@ -25,15 +25,24 @@ public class CommandGenerator {
 //				return availableCommands[i];
 //			}
 //		}
-		Command otro=null;
-		for (Command e : availableCommands) {
-			if(e.parse(commandWords)!= null) {
-				otro=e;
-				return e;
-			}
-		}
-		if(otro==null) {throw new CommandParseException("[ERROR]: Unknown Command \n");}
-		return otro;
+		/*
+		 * Command otro=null; for (Command e : availableCommands) {
+		 * otro=e.parse(commandWords); if(otro!=null) break;{ otro=e; return e; } }
+		 * if(otro==null) {throw new
+		 * CommandParseException("[ERROR]: Unknown Command \n");} return otro;
+		 */
+		int i = 0;
+		 Command command = null;
+		 
+		 for(Command c : availableCommands){
+			 command = availableCommands[i].parse(commandWords);
+			 if (command != null) break;
+			 else i++;
+		 }
+		 
+		 if(command == null) throw new CommandParseException("[ERROR]: Unknown command\n");
+		 
+		 return command;
 		
 	}
 	public static String commandHelp() {

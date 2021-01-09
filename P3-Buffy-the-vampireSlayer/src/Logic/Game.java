@@ -66,9 +66,9 @@ public class Game implements IPrintable {
 				update();
 				this.errorAdd=2;
 			}
-			else this.errorAdd=0;
+			else throw new UnvalidPsotionException("[ERROR] : "+"("+x+","+y+"): "+"Unvalid position");
 		}
-		else {throw  new NotEnoughCoinsException("[ERROR]: Defender cost : Not enough coins");}
+		else {throw  new NotEnoughCoinsException("[ERROR]: Defender cost is 50: Not enough coins");}
 	}
 
 	public void addVampire(int x,int y)throws UnvalidPsotionException ,NoMoreVampiresException{
@@ -80,7 +80,7 @@ public class Game implements IPrintable {
 					//this.cont++;
 				}
 				else {
-					throw new NoMoreVampiresException("[ERROR] : "+"("+x+","+y+"): "+"Limite de vampire");
+					throw new NoMoreVampiresException("[ERROR]: No more remaining vampires left");
 					} 
 			}
 			else {
@@ -103,7 +103,7 @@ public class Game implements IPrintable {
 					else this.errorAddVampire=0;
 					
 				}
-				else throw new DraculalsAliveException("[ERROR] : Dracula is already alive"); 
+				else throw new DraculalsAliveException("[ERROR] : Dracula is already on board"); 
 			}
 			else throw new UnvalidPsotionException("[ERROR] : "+"("+x+","+y+"): "+"Unvalid position");
 		}
@@ -121,11 +121,11 @@ public class Game implements IPrintable {
 			}
 			else throw new UnvalidPsotionException("[ERROR] : "+"("+x+","+y+"): "+"Unvalid position");
 		}
-		else  throw new NoMoreVampiresException("[ERROR] : Limite de Vampire");
+		else  throw new NoMoreVampiresException("[ERROR]: No more remaining vampires left");
 		
 		
 	}
-	public boolean addBloodBank(int x, int y, int z)throws UnvalidPsotionException, NotEnoughCoinsException, NoMoreVampiresException, DraculalsAliveException {
+	public boolean addBloodBank(int x, int y, int z)throws UnvalidPsotionException, NotEnoughCoinsException {
 		boolean ok=false;
 		if(celdaVacia(x, y)) {
 			if(this.player.getCoins()>=z) {
@@ -139,7 +139,7 @@ public class Game implements IPrintable {
 				else {throw new UnvalidPsotionException("[ERROR]: position "+"("+x+","+y+"): "+"Unvalid position");}
 			}
 			else { //this.errorAddVampire=1;
-				throw new NotEnoughCoinsException ("[ERROR]: Defender cost : Not enough coins");
+				throw new NotEnoughCoinsException ("[ERROR]: Defender cost is "+z+": Not enough coins");
 			}
 		}
 		else {//this.errorAddVampire=0;
@@ -197,12 +197,6 @@ public class Game implements IPrintable {
 	public int getDimY() {
 		return this.level.getDimY();
 	}
-//	public int getCoins() {
-//		return this.player.getCoins();
-//	}
-//	public int getPrecio() {
-//		return this.player.getPrecio();
-//	}
 	public IAttack getAttackableInPosition(int x, int y) {
 		
 		return this.gameObjectboard.getAttackableInPosition(x,y);
@@ -214,12 +208,7 @@ public class Game implements IPrintable {
 	public Random getRand() {
 		return rand;
 	}
-//	public int getcontVampire() {
-//		return this.cont;
-//	}
-//	public int limitevampire() {
-//		return gameObjectboard.limitevampire();
-//	}
+
 	public double  getfrecuencia() {
 		return this.level.getVampireFrequency();
 	}
@@ -280,7 +269,7 @@ public class Game implements IPrintable {
 		return this.gameObjectboard.celdaVacia(x, y);
 	}
 
-	public void garlicPush() throws NotEnoughCoinsException, UnvalidPsotionException, NoMoreVampiresException, DraculalsAliveException{
+	public void garlicPush() throws NotEnoughCoinsException{
 		if(this.player.getCoins()>=10) {
 			this.gameObjectboard.garlicPush();
 			this.player.usargarlicpush();
@@ -291,13 +280,13 @@ public class Game implements IPrintable {
 		else throw new NotEnoughCoinsException("[ERROR]: Defender cost : Not enough coins");
 	}
 
-	public void lightFlash() throws UnvalidPsotionException, NoMoreVampiresException, DraculalsAliveException ,NotEnoughCoinsException{
+	public void lightFlash() throws NotEnoughCoinsException{
 		
 		if(this.player.getCoins()>=this.player.getPrecio()) {
 			this.gameObjectboard.lightFlash();
 			update();
 		}
-		else throw new NotEnoughCoinsException("[ERROR]: Defender cost : Not enough coins");
+		else throw new NotEnoughCoinsException("[ERROR]: Light Flash cost is 50 : Not enough coins");
 		
 	}
 

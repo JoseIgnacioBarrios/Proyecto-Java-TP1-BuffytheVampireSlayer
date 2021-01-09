@@ -17,16 +17,9 @@ public class ResetCommand extends Command{
 
 	@Override
 	public Command parse(String[] commandWords)throws CommandParseException {
-		// TODO Auto-generated method stub
-		//try {
+
 				return parseNoParamsCommand(commandWords);
-//		}
-//		catch (CommandParseException e) {
-//			// TODO: handle exception
-//			//throw new CommandParseException("[ERROR]: Command "+this.name+" :"+incorrectNumberOfArgsMsg);
-//			System.out.println(e.getMessage());
-//		}
-//		return null;
+
 		
 	}
 

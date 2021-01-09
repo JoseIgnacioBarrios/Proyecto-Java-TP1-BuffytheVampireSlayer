@@ -22,21 +22,14 @@ public class LightFlashCommand extends Command{
 		catch (NotEnoughCoinsException e) {
 			// TODO: handle exception
 			System.out.println(e.getMessage());
-			throw new CommandExecuteException("[ERROR]: Failed to Light");
+			throw new CommandExecuteException("[ERROR]: Failed to Light Flash");
 		}
 	}
 
 	@Override
 	public Command parse(String[] commandWords)throws CommandParseException {
-		//try {
 				return parseNoParamsCommand(commandWords);
-//		}
-//		catch (CommandParseException e) {
-//			// TODO: handle exception
-//			//throw new CommandParseException("[ERROR]: Command "+this.name+" :"+incorrectNumberOfArgsMsg);
-//			System.out.println(e.getMessage());
-//		}
-//		return null;
+
 	}
 
 }
